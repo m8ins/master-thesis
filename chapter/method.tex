@@ -1,29 +1,28 @@
 This section explains how data was collected, how the different visualizations were coded, and how the candidates were tested.
 
-\subsection{Data Collection}
+\subsection{Data Collection Pipeline}
 
-The application for collecting the tweets was written in Python 3 (\cite{10.5555/1593511}), the Twitter API was accessed using the package \emph{Tweepy} (\cite{roesslein2020tweepy}). Using the streaming capabilities of Tweepy, all German tweets containing one or more of the keywords \begin{verbatim}
+The application for collecting the tweets was written in Python 3 (\cite{10.5555/1593511}), the Twitter API was accessed using the package \emph{Tweepy} (\cite{roesslein2020tweepy}). Using the streaming capabilities of Tweepy, all tweets in German containing one or more of the keywords \begin{verbatim}
     Corona, Covid-19, covidioten, distancing
 \end{verbatim}
 were collected. From the returned Tweet Objects\footnote{The documentation on what data a Tweet Object contains can be found here: https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/tweet-object}, only a few data points were kept that were deemed interesting before the data collection started. This has mainly ethical reasons (\cite{richards2014big}): the author did not want to collect excessive personal data without knowing why, even though this has become the norm for big data over the last decade. The following data points of a tweet object are stored in a database:
+
 \begin{itemize}
 \item \textbf{The full text of the tweet.} This is mainly used for the sentiment analysis and other natural language processing-tasks.
 \item \textbf{The tweet's time-stamp.}
 \item \textbf{The ID of the tweet.} This makes it easier to check for duplicates in the data base. 
-\item \textbf{The user name of the author.} As discussed above, Twitter has its own set of opinion leaders. Collecting the user names allows for later analysis over, e.g., who tweets the most.
+\item \textbf{The user name of the tweet author.} As discussed above, opinion leadership is a phenomenon also on Twitter. Collecting the user names allows for later analysis, e.g., which users tweet the most.
+\item \textbf{The user's self-description.} Users on Twitter can enter a short description, the so-called \emph{bio}.
 \item \textbf{The user's friend count.} This shows how many other accounts the user in question is following.
 \item \textbf{The user's follower count.} This shows how many other accounts follow the user in question. \footnote{The definitions for a user's friend count and follower count can be found here: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/overview}
 \item \textbf{The country where the tweet was sent.} Twitter also offers coordinate-based geolocations, but choosing the country instead seemed to honour the user's privacy more.
 \item \textbf{Whether the account is verified or not.}
 \item \textbf{The source of the tweet.} This shows if the tweet came from the Web-App, a desktop app, a mobile app, a 3rd party-application or other sources.
-\item \textbf{The calculated sentiment of the tweet.} The score gets calculated during the pre-processing of the tweet and directly attached to the dictionary that gets pushed to the data base. Later section will go into more detail about both the data base used and the method of calculating the sentiment.
+\item \textbf{The calculated sentiment of the tweet.} The score gets calculated during the pre-processing of the tweet. Later sections will go into more detail on how the sentiment is calculated.
 \end{itemize}
-
-
-
 
 %TODO: Add figure how the data was collected (it's in miro)
 
-As Twitter's \emph{Streaming API} seems to give the most complete data set on Twitter's free tier (\cite{bruns_twitter_2014}), the streaming capabilities were used. This meant, however, that the application had to run 24/7: the streaming API streams the data as it comes in and does not save it on Twitter's network. To ensure constant availability, the python application that connects to the streaming API and processes the incoming tweets runs in a Docker Container (\cite{merkel2014docker}) on Google's App Engine (\cite{google_app_2020}). This makes it easy to set up a serverless infrastructure with high availability.
+Twitter's \emph{Streaming API} was used as it gives the most complete data set on Twitter's free tier (\cite{bruns_twitter_2014}). This meant, however, that the application had to run 24/7: the streaming API streams the data as it comes in and does not save it on Twitter's network. To ensure constant availability, the python application that connects to the streaming API and processes the incoming tweets runs in a Docker Container (\cite{merkel2014docker}) on Google's App Engine (\cite{google_app_2020}). This makes it easy to set up a serverless infrastructure with high availability.
 
-The python application that processes the incoming tweets 
+Tweets collected via the Streaming API are bundled to batches of 100. These batches then get published to a \emph{Pub/Sub Topic}. According to Google, \say{Pub/Sub is an asynchronous messaging service that decouples services that produce events from services that process events} (\cite{google_what_2020}). In this case, collecting the tweets gets decoupled from writing the tweets to a data base. This approach has multiple advantages. For one, the database connection does not need to be open constantly. This makes the pipeline more robust: if the database connection is closed---for whatever reason---the messages published to the pub/sub topic is saved for up to 30 days. Once the database connection is re-established, the messages get ingested and the tweets are added to the data base. 
