@@ -8,7 +8,7 @@ This section will go into further detail what data was collected from Twitter an
 The application for collecting the tweets was written in Python 3 (\cite{10.5555/1593511}), the Twitter API was accessed using the package \emph{Tweepy} (\cite{roesslein2020tweepy}). Using the streaming capabilities of Tweepy, all tweets in German containing one or more of the keywords \begin{verbatim}
     Corona, Covid-19, covidioten, distancing
 \end{verbatim}
-were collected. From the returned Tweet Objects\footnote{The documentation on what data a Tweet Object contains can be found here: https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/tweet-object}, only a few data points were kept that were deemed interesting before the data collection started. This has mainly ethical reasons (\cite{richards2014big}): the author did not want to collect excessive personal data without knowing why, even though this has become the norm for big data over the last decade. The following data points of a tweet object are stored in a database:
+were collected. From the returned Tweet Objects\footnote{The documentation on what data a Tweet Object contains can be found here: https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/tweet-object}, only a few data points were kept that were deemed interesting before the data collection started. This has mainly ethical reasons (\cite{richards2014big}): the author did not want to collect excessive personal data without knowing why, even though this has become the norm for big data over the last decade. The following data points of a tweet object get processed further and eventually saved to a database:
 
 \begin{itemize}
 \item \textbf{The full text of the tweet.} This is mainly used for the sentiment analysis and other natural language processing-tasks.
@@ -33,8 +33,6 @@ Tweets collected via the Streaming API are bundled to batches of 100. These batc
 
 \subsubsection{Database used}
 The tweets are stored in a \emph{Google BigQuery} database, a server-less data warehouse that allows fast analysis of large amounts of data (\cite{google2020b}). \emph{Google Firebase} was also considered as data storage (\cite{google2020c}). As Firebase is a NoSQL database, queries would have been easier to write: Instead of using SQL, standard Javascript with features like filter chaining would have been used. Seeing that the SQL-based BigQuery is better equipped to handle large amounts of data, this solution was chosen in the end.
-
-\parencite{barbera_tweeting_2015} Testtesttest
 
 % Combining Google's App Engine to run the script server-less and Google's BigQuery database meant that authentication against the data base was not an issue.
 
