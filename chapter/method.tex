@@ -52,6 +52,6 @@ For the tested prototype, two different visualizations were built: one which sho
 \begin{itemize}
     \item A word-filter which allows users to search the data base for tweets including a specific word
     \item A toggle to include retweets in the data set
-    \item A toggle to include neutral tweets in the data set
+    \item A toggle to include neutral tweets in the data set (neutral meaning tweets with a sentiment between -0.3 and +0.3)
 \end{itemize}
-
+Using these three filters, users can explore the dataset easily. The toggles to include retweets and neutral tweets in the data set changed the visualizations immediately, whereas the word-filter initiated a new database query. The idea behind this was that users are likely to look for a specific word and then want to explore how this word is presented in the data set. 
