@@ -47,11 +47,27 @@ Ultimately, D3 was chosen as a visualization framework. VegaLite is an opinionat
 
 Early prototypes of the tool used a Svelte-based web page to show the visualizations. The final tool, however, was written in Observable\footnote{https://observablehq.com}. Observable is a JavaScript-based notebook that, similarly to Jupyter Notebooks, combine code, output, and explanatory text. The notebooks allowed for quick iteration of the code, while its web-based nature also satisfied the requirement of being easily accessible without the need to download and install additional software.
 
-\subsubsection{Building the visualizations}
-For the tested prototype, two different visualizations were built: one which shows the volume of tweets over time, and one that shows the sentiment of tweets over time. Both visualizations shared a set of filters:
+\subsubsection{Fetching and processing the data}
+%For the tested prototype, two different visualizations were built: one which shows the volume of tweets over time, and one that shows the sentiment of tweets over time. Both visualizations shared a set of filters:
+To explore the dataset of collected tweets, users can have three additional filters that they can use
 \begin{itemize}
     \item A word-filter which allows users to search the data base for tweets including a specific word
     \item A toggle to include retweets in the data set
     \item A toggle to include neutral tweets in the data set (neutral meaning tweets with a sentiment between -0.3 and +0.3)
 \end{itemize}
-Using these three filters, users can explore the dataset easily. The toggles to include retweets and neutral tweets in the data set changed the visualizations immediately, whereas the word-filter initiated a new database query. The idea behind this was that users are likely to look for a specific word and then want to explore how this word is presented in the data set. 
+With these three filters users can easily explore the dataset. The toggles to include retweets and neutral tweets in the data set changed the visualizations immediately, whereas the word-filter initiated a new database query. The idea behind this was that users are likely to look for a specific word and then want to explore how this word is presented in the data set. One possible scenario is that users want to find out how the public thinks of masks. They then enter the keyword \emph{mask} into the search field and can then explore this term further. The first version of the dashboard made a new database call every time one of the toggles was clicked. This became an issue during pre-tests: the delay caused by the database call made it difficult to compare the visualizations with the different filters, e.g., to compare how the graph looks with or without retweets included.
+
+While D3 can work with raw data input and perform, e.g., filtering operations on these inputs, data operations were performed directly in the database using SQL queries. This decision was made because the final dataset was almost 1GB big. Relying on D3 for filtering and aggregating the data would have meant that every time a user opens the tool, she would have to wait for the whole dataset to finish downloading before she could use the tool itself. Using SQL queries instead meant that a lot less data had to be sent to the tool: instead of downloading the full 997MB of the data set, the query results were only about 10KB big which greatly improved performance.
+
+Every time a user filters for a new word, the tool fetches the data for the four different filter permutations: the full dataset, the dataset without retweets, the dataset without neutral tweets, and the dataset without retweets and neutral tweets. If the user then toggles additional filters, the corresponding pre-fetched dataset gets immediately visualized instead of fetching a new dataset from the database.
+
+\subsubsection{The visualizations themselves}
+The final prototype that was tested showed two different visualizations:
+\begin{enumerate}
+    \item \textbf{A visualization of the tweet volume over time:} Users can explore how many tweets were sent per day. When filtering for a word, users can see how many of the tweets per day contained the word they searched for. They can also toggle a normalized view which shows the percentage of tweets containing the search word, rather than the absolute number.
+    \item \textbf{A visualization of the sentiment over time:} Using this visualization, users can explore how the public perception shifted over time. This visualization also offers to views. The default view shows to lines: one line shows the sentiment for the tweets containing the search word, the other line shows the sentiment for the tweets not containing the search word. A toggle shows only the daily average of all tweets instead, regardless of the search word.
+\end{enumerate}
+
+%TODO: insert images of the visualizations here
+
+Time series were chosen as primary visualization type because they are one of the most common visualizations (\cite{heer2010}). 
