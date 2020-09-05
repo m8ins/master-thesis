@@ -11,14 +11,14 @@ The application for collecting the tweets was written in Python 3 (\cite{10.5555
 were collected. From the returned Tweet Objects\footnote{The documentation on what data a Tweet Object contains can be found here: https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/tweet-object}, only a few data points were kept that seemed interesting before the data collection started. This has mainly ethical reasons (\cite{richards2014big}). The author did not want to collect excessive personal data without having a good reason to, even though this has become the norm for big data over the last decade. The following data points of a tweet object get processed further and eventually saved to a database:
 
 \begin{itemize}
-\item \textbf{The full text of the tweet.} This is mainly used for the sentiment analysis and other natural language processing-tasks.
+\item \textbf{The full text of the tweet.} This is mainly used for sentiment analysis and other natural language processing-tasks.
 \item \textbf{The tweet's time-stamp.}
 \item \textbf{The ID of the tweet.} This makes it easier to check for duplicates in the data base. 
 \item \textbf{The user name of the tweet author.} As discussed above, opinion leadership is a phenomenon also on Twitter. Collecting the user names allows for later analysis, e.g., which users tweet the most.
 \item \textbf{The user's self-description.} Users on Twitter can enter a short description, the so-called \emph{bio}.
 \item \textbf{The user's friend count.} This shows how many other accounts the user in question is following.
 \item \textbf{The user's follower count.} This shows how many other accounts follow the user in question. \footnote{The definitions for a user's friend count and follower count can be found here: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/overview}
-\item \textbf{The country where the tweet was sent.} Twitter also offers coordinate-based geolocations, but choosing the country instead seemed to honour the user's privacy more.
+\item \textbf{The country where the tweet was sent.} Twitter also offers coordinate-based geolocations, but choosing the country instead seemed to honor the user's privacy more.
 \item \textbf{Whether the account is verified or not.}
 \item \textbf{The source of the tweet.} This shows if the tweet came from the Web-App, a desktop app, a mobile app, a 3rd party-application or other sources.
 \item \textbf{The calculated sentiment of the tweet.} The score gets calculated during the pre-processing of the tweet. Later sections will go into more detail on how the sentiment is calculated.
@@ -29,8 +29,8 @@ were collected. From the returned Tweet Objects\footnote{The documentation on wh
 Twitter's \emph{Streaming API} was used as it gives the most complete data set on Twitter's free tier (\cite{bruns2014}). This meant, however, that the application had to run 24/7: the streaming API streams the data as it comes in and doesn't save it on Twitter's network. To ensure constant availability, the python application that connects to the streaming API and processes the incoming tweets runs in a Docker Container (\cite{merkel2014docker}) on Google's App Engine (\cite{google2020}). This makes it easy to set up a server-less infrastructure with high availability.
 
 \subsubsection{Data processing during the collection}
-Every time the Streaming API sent a tweet to the app collecting the data, a sentiment score for the tweet text was calculated. For this, the Natural Language Toolkit (NLTK) was used (\cite{loper2002nltk}). NLTK uses a dictionary-based approach for sentiment analysis. This means that the tool kit relies on a corpus that is coded with different sentiment scores (\cite{haselmayer2017sentiment}). Compared with machine learning-approaches, this approach high precision, but low recall (\cite{soroka2015}). This means that the polarity of a sentiment as computed by NLTK is usually correct; however, many text that do carry a specific sentiment are not recognized and are as suched marked as texts with neutral sentiments.
-A machine-learning based approach for calculating sentiments was also considered. However, the tool would have required a server running a Java-application. This would have meant a second instance of Google AppEngine, doubling the costs. Considering that the goal of this study is to test how laymen work with dataset, and not a scientific analysis of the discussion about the corona virus in the German twittersphere, the dictionary-based approach was chosen to keep down the costs.
+Every time the Streaming API sent a tweet to the app collecting the data, a sentiment score for the tweet text was calculated. For this, the Natural Language Toolkit (NLTK) was used (\cite{loper2002nltk}). NLTK uses a dictionary-based approach for sentiment analysis. This means that the tool kit relies on a corpus that is coded with different sentiment scores (\cite{haselmayer2017sentiment}). Compared with machine learning-approaches, this approach high precision, but low recall (\cite{soroka2015}). This means that the polarity of a sentiment as computed by NLTK is usually correct; however, many texts that do carry a specific sentiment are not recognized and are as such marked as texts with neutral sentiments.
+A machine-learning-based approach for calculating sentiments was also considered. However, the tool would have required a server running a Java-application. This would have meant a second instance of Google AppEngine, doubling the costs. Considering that the goal of this study is to test how laymen work with the dataset, and not a scientific analysis of the discussion about the corona virus in the German twittersphere, the dictionary-based approach was chosen to keep down the costs.
 
 \subsubsection{Storing the pre-processed tweets}
 Tweets collected via the Streaming API are bundled to batches of 100. These batches then get published as a message to a \emph{Pub/Sub Topic}. According to Google, \say{Pub/Sub is an asynchronous messaging service that decouples services that produce events from services that process events} (\cite{google2020a}). In this case, collecting the tweets gets decoupled from writing the tweets to a data base. This approach has multiple advantages. For one, the database connection does not need to be open constantly. This makes the pipeline more robust: if the database connection is closed---for whatever reason---the messages published to the pub/sub topic is saved for up to 30 days. Once the database connection is re-established, the messages get ingested and the tweets are added to the data base. It also allowed for some early experimentation with the table schema for the SQL table. Pub/Sub could be configured in a way that already acknowledged messages stay in the system and can be fetched again. This meant that even though the table schema was constantly reset in the first couple of days of data collection, the data was not lost and could simply be re-fetched again.
@@ -38,7 +38,7 @@ Tweets collected via the Streaming API are bundled to batches of 100. These batc
 
 The tweets are stored in a \emph{Google BigQuery} database, a server-less data warehouse that allows fast analysis of large amounts of data (\cite{google2020b}). \emph{Google Firebase} was also considered as data storage (\cite{google2020c}). As Firebase is a NoSQL database, queries would have been easier to write: Instead of using SQL, standard Javascript would have been used. This would result in easier queries as Javscript-features like method chaining would have been available. Seeing that the SQL-based BigQuery is better equipped to handle large amounts of data, this solution was chosen in the end. This turned out to be a good choice considering that the final dataset was almost 1GB big and that during an average testing session the data set was queried around 5 times. However, using BigQuery meant that the queries needed to be written in SQL, a language with complicated semantics (\cite{slutz1998massive}).
 
-BigQuery was chosen over other SQL databases, like SQLite oder Postgres, because it is also a Google service like AppEngine. This meant that authentication between the collection script and the database did not have to be implemented. BigQuery can also be directly connected to a Pub/Sub-Topic using Google DataFlow. However, as the data were additionally processed, saving the data was handled in a dedicated script. 
+BigQuery was chosen over other SQL databases, like SQLite or Postgres, because it is also a Google service like AppEngine. This meant that authentication between the collection script and the database did not have to be implemented. BigQuery can also be directly connected to a Pub/Sub-Topic using Google DataFlow. However, as the data were additionally processed, saving the data was handled in a dedicated script. 
 
 \subsection{Visualizing the data}
 To visualize the data from the streaming API, both Python-libraries like ggplot (\cite{wickham2016}) and JavaScript-Libraries like D3 (\cite{bostock}) and VegaLite (\cite{uwidl}) were evaluated. To make the prototype as accessible as possible, the choice was made to use a library based on the JavaScript web-technology. A web page is more accessible to laymen than a Python-based app. And even though Python scripts, including visualizations, can be embedded easily on the web now, choosing a web technology seemed like the right approach.
@@ -70,4 +70,22 @@ The final prototype that was tested showed two different visualizations:
 
 %TODO: insert images of the visualizations here
 
-Time series were chosen as primary visualization type because they are one of the most common visualizations (\cite{heer2010}). 
+Time series were chosen as the primary visualization type because they are one of the most common visualizations (\cite{heer2010}). Choosing a common visualization aids laymen to read and interpret the data correctly (\cite{borner2016}), whereas more complicated visualizations can be difficult to understand for those people. Because of this, the development of certain aspects of the dataset \emph{over time} was chosen as the primary type of information that the visualizations should convey.
+
+\begin{figure}[h!tb]
+    \fbox{\includegraphics[width=\linewidth]{images/volume_areachart.jpg}}
+    \caption{The daily tweet volume as shown in an area chart. This example shows the distribution of the word \emph{App}.}
+    \label{fig:volume_areachart}
+\end{figure}
+
+To visualize the tweet volume over time, both an area chart and a bar chart were considered. Line charts and area charts are common visualizations to show how something changed over time. Stock prices, for example, are usually shown as a line chart. An area chart is a line chart with its areas filled. The fill was used to indicate how many tweets contained the search word. However, visualizations which uses line- or area charts to show development often show data over a wider time range. Stock prices, for example, are shown over several years. The data set for this study spanned only around two months.
+
+Because of this, the chart was changed to a bar chart. Bar charts can't show information as concise as line- or area charts. However, using a bar chart makes it easier to find and compare specific days. Using Chrome's responsive design inspector, the bar chart was pre-tested across multiple device sizes and seemed still usable even on smaller 11-inch displays without scrolling. The final user tests all used the bar chart visualization.
+
+\begin{figure}[h!tb]
+    \fbox{\includegraphics[width=\linewidth]{images/volume_barchart.jpg}}
+    \caption{The daily tweet volume as a bar chart. This example shows the distribution of the word \emph{App}.}
+    \label{fig:volume_barchart}
+\end{figure}
+
+%TODO: Text für Sentiment-Graph hierher
