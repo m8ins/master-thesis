@@ -89,3 +89,48 @@ Because of this, the chart was changed to a bar chart. Bar charts can't show inf
 \end{figure}
 
 %TODO: Text für Sentiment-Graph hierher
+
+The graph which shows the development of the sentiment over time is a line chart. This visualization was chosen because the sentiment can also show negative values, as its domain ranges from -1 to +1. %Does this make sense? Why didn't I choose a bar chart? The line chart felt like the more natural choice here, but y tho?
+
+\begin{figure}[h!tb]
+    \fbox{\includegraphics[width=\linewidth]{images/sentiment_linechart.jpg}}
+    \caption{The average sentiment per day. The blue line shows the average sentiment of tweets containing \emph{App}, the red line shows the sentiment of tweets not containing this word.}
+    \label{fig:sentiment_linechart}
+\end{figure}
+
+In this visualization, users can toggle between two view modes. The default mode shows the daily average sentiment of the tweets containing the search word as a blue line and the daily average sentiment of tweets \emph{not} containing the word as a red line. Users can also toggle to only see the average sentiment without any word-filters applied. This lets them, for example, see the influence of neutral tweets or retweets on the whole dataset.
+
+The two visualizations share the same three aforementioned filters. This means that both visualizations share the same data set which could make it easier for participants to mentally connect them. At the same time, placing the filter possibilities at the top of the Observable notebook means that the visualizations are affected by filters that are not in their immediate neighborhood. This trade-off was tested in the user study which will be discussed later in this work.
+
+\subsubsection{Ideas that were cut for time}
+\begin{itemize}
+    \item Collocations were calculated as a means to detect daily trends. The idea was that the top 3 / top 5 collocations of a day could be shown on hover in a tooltip in an attempt to both find possibly interesting filter terms and to explain certain peaks that are seen in both the tweet volume and the sentiment. While for some days there were interesting collocations---for example, on June 16th, when the German Covid-19 tracking app was released---most of the calculated collocations did not seem to offer interesting insights.
+    \item Tooltips on hover in both visualizations. The tooltips were planned to include details, like the date and the specific values of, e.g., the sentiment. There are some methods to get tooltips to work in D3, but none of them seemed to work in this context. In the end, tooltips were realized in the bar chart by adding title-attributes to the divs that create the bars. By hovering over the single bars, the title is shown. For the sentiment line chart, however, this was not possible, as there was no div-per-day for the attribute-trick to work. This code was used to add the title attribute:
+    \begin{figure}[h!]
+        \begin{verbatim}
+            svg.append("rect:title")
+            .text(
+            d =>
+            `${formatTime(d.date)} | ${d.query_count} von ${
+                d.total_count
+            } Tweets (${(d.percentage * 100).toFixed(1)} %)`
+        );
+        \end{verbatim}
+        \caption{The code that adds the date, the number of words containing the search word, the total number of tweets, and the percentage of words containing the search word to the bin of every day.}
+        \label{fig:sentiment_linechart}
+    \end{figure}
+    \item The country from where a tweet was sent was included in the data collection. The plan behind this was to check if the countries of origin show different behavior. A theoretical example would be the question if tweets about a covid-19 vaccine that come from Russia are more positive than tweets about a vaccine from other countries. However, out of the over 2.5 million tweets collected only around 20,000 contained the origin country. Because of this tiny data set, this feature was not implemented.
+    \item The verification status of the tweets' authors was also saved with every tweet. The plan was to offer users an option to compare tweets from verified and unverified sources. As this would have added a lot of complexity to the system for the users, this feature was eventually scrapped before the user tests.
+\end{itemize}
+
+\subsection{Testing the dashboard}
+\begin{itemize}
+    \item I wanted to test two things: how participants use the dashboard and how easy they can read the two visualizations.
+    \item Because of this, the test consisted of two parts. 5-7 minutes of free exploration where the participants could use the dashboard however they wanted, and 4 tasks with increasing difficulty to check if they can use the dashboard as intended. For both parts participants were asked to think aloud.
+    \begin{itemize}
+        \item Task 1 was to find out on which day most tweets were sent. This task can be solved by finding the longest bar in the bar chart. It didn't matter which word was entered as search word, as participants were asked to find the highest \emph{total} number of tweets, which can always be seen in blue. However, participants should toggle both neutral tweets and retweets to show up in the data set. After finding the highest bar, participants could hover over it to find the date in the tooltip.
+        \item Task 2 was to find out on which day the most tweets were sent about Dr. Drosten. This search term was used to see if the participants could figure out that the search is, in fact, a filter. Only very little results were found typing in \say{Dr. Drosten}. Participants had to search for \say{Drosten} instead. This task also aimed to find out whether participants understand the difference between the day with the absolute highest number of tweets and with the relative highest number, compared to the total number of tweets that day.
+    \end{itemize}
+    \item After the participant finished the tasks, a retrospective interview was conducted
+    \item The whole test---free exploration, tasks, and retrospective interview---was semi-structured. The script based on which the tests were conducted is in the appendix.
+\end{itemize}
