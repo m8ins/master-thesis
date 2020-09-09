@@ -3,7 +3,7 @@ This section explains how data was collected, how the different visualizations w
 \subsection{Data Collection Pipeline}
 This section will go into further detail what data was collected from Twitter and how this data was collected, prepared, and stored.
 
-\subsubsection{Fetching the data from Twitter}
+\subsubsection{Fetching the data from Twitter} \label{sec:fetchedData}
 
 The application for collecting the tweets was written in Python 3 (\cite{10.5555/1593511}), the Twitter API was accessed using the package \emph{Tweepy} (\cite{roesslein2020tweepy}). Using the streaming capabilities of Tweepy, all tweets in German containing one or more of the keywords \begin{verbatim}
     Corona, Covid-19, covidioten, distancing
@@ -68,8 +68,6 @@ The final prototype that was tested showed two different visualizations:
     \item \textbf{A visualization of the sentiment over time:} Using this visualization, users can explore how the public perception shifted over time. This visualization also offers to views. The default view shows to lines: one line shows the sentiment for the tweets containing the search word, the other line shows the sentiment for the tweets not containing the search word. A toggle shows only the daily average of all tweets instead, regardless of the search word.
 \end{enumerate}
 
-%TODO: insert images of the visualizations here
-
 Time series were chosen as the primary visualization type because they are one of the most common visualizations (\cite{heer2010}). Choosing a common visualization aids laymen to read and interpret the data correctly (\cite{borner2016}), whereas more complicated visualizations can be difficult to understand for those people. Because of this, the development of certain aspects of the dataset \emph{over time} was chosen as the primary type of information that the visualizations should convey.
 
 \begin{figure}[h!tb]
@@ -103,22 +101,38 @@ In this visualization, users can toggle between two view modes. The default mode
 The two visualizations share the same three aforementioned filters. This means that both visualizations share the same data set which could make it easier for participants to mentally connect them. At the same time, placing the filter possibilities at the top of the Observable notebook means that the visualizations are affected by filters that are not in their immediate neighborhood. This trade-off was tested in the user study which will be discussed later in this work.
 
 \subsubsection{Ideas that were cut for time}
+The big data pipeline and the visualization dashboard were both built using the principles of \emph{Shape Up}, a relatively new management approach for software development projects (\cite{singer2019}). The core principle of Shape Up is to have a fast time frame with a variable scope. Instead of creating a set of user stories, which then get estimates on how long they probably take, Shape Up's philosophy is to set clear boundaries, take a fixed amount of time (usually six weeks), and make the best out of the time they allowed themselves on the project. This methodology seemed like a more reasonable approach to writing a program for a master's thesis as the time frame is very strict.
+Because of this, however, some ideas that were planned for the visualization dashboard were ultimately cut for time.
+
+\begin{wrapfigure}{l}{0.3\textwidth}
+    \includegraphics[width=0.28\textwidth]{images/twitter_trends.jpg}
+    \caption{The trending topics on twitter. Collected on September 9th, 2020, 8.28am}
+    \label{fig:twitter_trends}
+\end{wrapfigure}
+
+One feature that was not sufficiently finished when the user tests became was a sort of \emph{trend analysis} using the collected tweets. The plan was to show users trending topics for each day in the data set. Due to Twitter's limitations in their API, it was not possible to retrieve the daily trends that Twitter already collects and shows. 
+To overcome this limitation, collocations were calculated for the tweet texts of each day. Collocations are \say{a lexical phenomenon} that \say{cover word pairs and phrases that are commonly used in language} (\cite[2]{mckeown2000collocations}), which means that they are word pairs that encounter together more often than by pure chance. The idea was that by calculating collocations on the tweets of a day, those word pairs could be phrases that were talked about on this day. While for some days the results seemed promising, for most of the days the calculated word pairs did not give much information. While it is possible that tweaks on the algorithm which calculated the collocations could have yielded more informative results, these tweaks could not be implemented before the user tests started.
+
+Another feature that was planned, but not included, were tooltips in both visualizations. The tooltips were planned to include details, like the date and the specific value of the sentiment when hovering over a point on the line chart. While tooltips are generally possible in D3 for different chart types, there was no time left to properly implement them. For the bar chart, a work-around was used: Title-attributes were added to the div-containers that create the bars using the code seen in figure \ref{fig:sentiment_linechart}. By hovering over the bars, this title attribute is shown, which contained the date, the total number of tweets, the number of tweets containing the search word, and the percentage of tweets containing the search word. As the line chart is not built using divs per day, but rather from a single SVG element, this workaround could not be used in the chart showing the development of the sentiment over time.
+
+\begin{figure}[h!]
+    \begin{verbatim}
+        svg.append("rect:title")
+        .text(
+        d =>
+        `${formatTime(d.date)} | ${d.query_count} von ${
+            d.total_count
+        } Tweets (${(d.percentage * 100).toFixed(1)} %)`
+    );
+    \end{verbatim}
+    \caption{The code that adds the date, the number of words containing the search word, the total number of tweets, and the percentage of words containing the search word to the bin of every day.}
+    \label{fig:sentiment_linechart}
+\end{figure}
+
+As shown in chapter 
+
 \begin{itemize}
-    \item Collocations were calculated as a means to detect daily trends. The idea was that the top 3 / top 5 collocations of a day could be shown on hover in a tooltip in an attempt to both find possibly interesting filter terms and to explain certain peaks that are seen in both the tweet volume and the sentiment. While for some days there were interesting collocations---for example, on June 16th, when the German Covid-19 tracking app was released---most of the calculated collocations did not seem to offer interesting insights.
-    \item Tooltips on hover in both visualizations. The tooltips were planned to include details, like the date and the specific values of, e.g., the sentiment. There are some methods to get tooltips to work in D3, but none of them seemed to work in this context. In the end, tooltips were realized in the bar chart by adding title-attributes to the divs that create the bars. By hovering over the single bars, the title is shown. For the sentiment line chart, however, this was not possible, as there was no div-per-day for the attribute-trick to work. This code was used to add the title attribute:
-    \begin{figure}[h!]
-        \begin{verbatim}
-            svg.append("rect:title")
-            .text(
-            d =>
-            `${formatTime(d.date)} | ${d.query_count} von ${
-                d.total_count
-            } Tweets (${(d.percentage * 100).toFixed(1)} %)`
-        );
-        \end{verbatim}
-        \caption{The code that adds the date, the number of words containing the search word, the total number of tweets, and the percentage of words containing the search word to the bin of every day.}
-        \label{fig:sentiment_linechart}
-    \end{figure}
+  
     \item The country from where a tweet was sent was included in the data collection. The plan behind this was to check if the countries of origin show different behavior. A theoretical example would be the question if tweets about a covid-19 vaccine that come from Russia are more positive than tweets about a vaccine from other countries. However, out of the over 2.5 million tweets collected only around 20,000 contained the origin country. Because of this tiny data set, this feature was not implemented.
     \item The verification status of the tweets' authors was also saved with every tweet. The plan was to offer users an option to compare tweets from verified and unverified sources. As this would have added a lot of complexity to the system for the users, this feature was eventually scrapped before the user tests.
 \end{itemize}
