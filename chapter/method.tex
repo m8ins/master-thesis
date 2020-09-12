@@ -129,20 +129,17 @@ Another feature that was planned, but not included, were tooltips in both visual
     \label{fig:sentiment_linechart}
 \end{figure}
 
-As shown in chapter 
+As shown in chapter \ref{sec:fetchedData}, the country of origin for every tweet was collected. With this, a visualization could have shown differences in tweeting behavior between different countries. A theoretical example would be the questions if tweets about a Covid-19 vaccine that come from Russia are more positive than tweets about a vaccine that were tweeted from other countries. However, out of the 2.5 million tweets collected, only around 20,000 contained the origin country. Because of this small amount of data, this feature was not implemented.
 
-\begin{itemize}
-  
-    \item The country from where a tweet was sent was included in the data collection. The plan behind this was to check if the countries of origin show different behavior. A theoretical example would be the question if tweets about a covid-19 vaccine that come from Russia are more positive than tweets about a vaccine from other countries. However, out of the over 2.5 million tweets collected only around 20,000 contained the origin country. Because of this tiny data set, this feature was not implemented.
-    \item The verification status of the tweets' authors was also saved with every tweet. The plan was to offer users an option to compare tweets from verified and unverified sources. As this would have added a lot of complexity to the system for the users, this feature was eventually scrapped before the user tests.
-\end{itemize}
+Another data point that was collected, but ultimately not used, was the verification status of the tweets' authors. The initial plan was to offer users an option to compare tweets from verified and unverified sources. The plan was to include a toggle that breaks up the existing bar chart and line chart with another dimension \emph{is\_verified}. This would have added a lot of complexity to the visualizations for the users. Because the focus of this work is on visualizations that can be easily read and understand by laymen, this feature was eventually scrapped before the user tests.
 
 \subsection{Testing the dashboard}
-\begin{itemize}
-    \item I wanted to test two things: how participants use the dashboard and how easy they can read the two visualizations.
-    \item Because of this, the test consisted of two parts. 5-7 minutes of free exploration where the participants could use the dashboard however they wanted, and 4 tasks with increasing difficulty to check if they can use the dashboard as intended. For both parts participants were asked to think aloud.
+The user tests of the dashboard were testing two things: how users explore the dataset using the dashboard, and how easily they can read the two visualizations. For this, a semi-structured interview was prepared %TODO: Die Semi-Structured Quelle hierher packen!
+The test consisted of two parts. After a brief introduction to the topic of this master thesis and a quick overview over the dataset, participants got around five minutes to explore the dashboard however they wanted. During this time, they were already asked to think aloud.
+
+After this phase of free exploration, the participants were presented with four tasks in total with increasing difficulty. These tasks were designed to check the participants' ability to properly read the data visualizations. Again, participants were asked to think aloud while solving the tasks.
     \begin{itemize}
-        \item Task 1 was to find out on which day most tweets were sent. This task can be solved by finding the longest bar in the bar chart. It didn't matter which word was entered as search word, as participants were asked to find the highest \emph{total} number of tweets, which can always be seen in blue. However, participants should toggle both neutral tweets and retweets to show up in the data set. After finding the highest bar, participants could hover over it to find the date in the tooltip.
+        \item Task 1 was to find out on which day most tweets were sent. This task can be solved by finding the longest bar in the bar chart. It didn't matter which word was entered as the search word, as participants were asked to find the highest \emph{total} number of tweets, which can always be seen in blue. However, participants should toggle both neutral tweets and retweets to show up in the data set. After finding the highest bar, participants could hover over it to find the date in the tooltip.
         \item Task 2 was to find out on which day the most tweets were sent about Dr. Drosten. This search term was used to see if the participants could figure out that the search is, in fact, a filter. Only very little results were found typing in \say{Dr. Drosten}. Participants had to search for \say{Drosten} instead. This task also aimed to find out whether participants understand the difference between the day with the absolute highest number of tweets and with the relative highest number, compared to the total number of tweets that day.
         \item Task 3 was to find out how the sentiment about Dr. Drosten was when the neutral tweets were filtered out. This task tested two things: first if the quick filters were recognized as such, and if their job was clear. Then, the participants' ability and willingness to discuss ambiguous results was tested. The sentiments of tweets about Dr. Drosten changed significantly over time, with various peaks in both positive and negative sentiment as seen in figure \ref{fig:sentiment_drosten_noneutral}. Thus, there was no definite answer to the question. Participants had to read the data carefully and interpret it.
         \begin{figure}[h!tb]
@@ -153,6 +150,9 @@ As shown in chapter
         \item Task 4 was another task to test the participants' ability and willingness to discuss their findings. %TODO: why should they be able to discuss findings? It's important from a data literacy-perspective.
         For this final task, participants were asked to find out how retweets influence the overall sentiment of the German twitter discussion about covid-19. To solve this task, participants had to observe the influence the retweet-filter had on the sentiment graph and discuss this change. As in task 3, there is no definite right or wrong answer.
     \end{itemize}
+
+    After the participants had completed the four tasks, a retrospective interview was conducted. 
+    \begin{itemize}
     \item After the participant finished the tasks, a retrospective interview was conducted
     \item The whole test---free exploration, tasks, and retrospective interview---was semi-structured. The script based on which the tests were conducted is in the appendix.
     \item The retrospective interview consisted was about the participants' experience working with the tool and solving the tasks. Questions that arose during testing were also asked in the retrospective interview rather than during testing itself.
