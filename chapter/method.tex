@@ -65,6 +65,7 @@ Because of this, data fetching was rewritten before the user tests started. Ever
 
 \subsubsection{Visualizing the data}
 The final prototype that was tested included two different visualizations:
+
 \begin{enumerate}
     \item \textbf{A visualization of the tweet volume over time:} Users can explore how many tweets were sent per day. When filtering for a word, users can see how many of the tweets per day contained the word they searched for. They can also toggle a normalized view which shows the percentage of tweets containing the search word, rather than the absolute number.
     \item \textbf{A visualization of the sentiment over time:} Using this visualization, users can explore if and how the public perception of a topic changed over time. This visualization also offers two views. The default view shows two lines: one line shows the sentiment for the tweets containing the search word, the other line shows the sentiment for the tweets \emph{not} containing the search word. A toggle shows only the daily average of all tweets instead, regardless of the search word.
@@ -100,8 +101,10 @@ The graph which shows the development of the sentiment over time is a line chart
 In this visualization, users can toggle between two view modes. The default mode shows the daily average sentiment of the tweets containing the search word as a blue line and the daily average sentiment of tweets \emph{not} containing the word as a red line. Users can also toggle to only see the average sentiment without any word-filters applied. This lets them, for example, see the influence of neutral tweets or retweets on the whole dataset.
 
 The two visualizations share the same three aforementioned filters. This means that both visualizations share the same data set which could make it easier for participants to mentally connect them. At the same time, placing the filter possibilities at the top of the Observable notebook means that the visualizations are affected by filters that are not in their immediate neighborhood. This trade-off was tested in the user study which will be discussed later in this work.
+% TODO: the notebook also had explanatory texts. should they be included in the method section?
 
 \subsubsection{Ideas that were cut for time}
+
 \begin{wrapfigure}{l}{0.3\textwidth}
     \includegraphics[width=0.28\textwidth]{images/twitter_trends.jpg}
     \caption{The trending topics on twitter. Collected on September 9th, 2020, 8.28am}
