@@ -124,6 +124,7 @@ Some participants voiced the usefulness of the guideline marking the 0-line in t
     Ich würde sagen, also die Linie bewegt sich schon im Durchschnitt oberhalb des 0-Wertes hier, aber hier an manchen Tagen reißt sie deutlich nach unten ein. (w26a, l. 66)
 \end{quote}
 
+\clearpage
 \subsection{Hindering factors}
 Hindering factors are factors that hindered the participants in their usage of the tool in one way or another.
 
@@ -159,3 +160,147 @@ One participant also said that having to constantly scroll up to the filter stat
 \end{quote}
 
 \subsubsection*{Missing legend on graphs}
+Legends are used in color-coded graphs so that users can map the used colors to their meaning. An example of this can be seen in figure \ref{fig:legend_example}.
+
+\begin{figure}[h!tb]
+    \fbox{\includegraphics[width=0.7\linewidth]{images/legend_example.jpg}}
+    \caption{Example of a legend. Screenshot from https://observablehq.com/@cahaber/cartesian-legend, highlight by the author}
+    \label{fig:legend_example}
+\end{figure}
+
+However, the tested tool did not have such a legend. Instead, the meaning of the different colors were explained in explanatory texts of the graphs, as seen in figure %\ref{fig:sentiment_nolegend}.
+
+% TODO: will ich die Grafik drin lassen? Evtl. um Platz zu schinden.
+% \begin{figure}[h!tb]
+%     \fbox{\includegraphics[width=\linewidth]{images/sentiment_nolegend.jpg}}
+%     \caption{The sentiment chart with textual explanation of the colors below it}
+%     \label{fig:sentiment_nolegend}
+% \end{figure}
+
+This resulted in several issues. One participant did not understand the meaning of the differently colored bars in the bar chart because she did not read the explanatory text thoroughly enough:
+
+\begin{quote}
+    B: Meine Frage ist jetzt nur, was bedeutet Orange und was bedeutet blau? 
+
+    Screen: Scrollt etwas runter
+
+    B: Da weiß ich aber nicht, ob das nachher noch kommt. Aber jetzt im ersten Moment hab ich nicht gesehen, was das bedeutet. (w25, ll. 8-10)
+\end{quote}
+
+The same participant had trouble recognizing the textually explained color in the sentiment chart.
+
+\begin{quote}
+    Screen: Scrollt zum Sentiment-Erklärtext runter
+
+    B: Hä, rot? Ich seh gar keine hellrote Linie, sondern nur hier das Orange und blau.
+
+    I: Ja, die orange Linie ist damit gemeint.
+
+    B: Achso, okay. (w25, ll. 24-27)
+\end{quote}
+
+Another participant got confused by the textual explanation of the different parts of the chart. In this case, the word \say{blue} could have meant two different lines, one dark blue and one light blue.
+
+\begin{quote}
+    "Die Linie zeigt die durchschnittliche Stimmung..." Aber welche Linie ist denn jetzt DIE Linie? Dann gibt es eine blaue und eine hellblaue. (m24, l. 65)
+\end{quote}
+
+\subsubsection*{Layout of charts and texts}
+This category contains problems that arose during testing that stem from the layout of charts and texts. One participant did not see the explanatory text for the sentiment graph as it was below the graph itself:
+
+\begin{quote}
+    B: Okay, ich glaub ich hab noch nicht ganz verstanden, was mir der Graph sagen will. Also, Sentiment ist quasi die Wertung?
+
+    I: weiter unten steht auch noch mehr Erklärtext dazu.
+
+    B: Okay. Aaah okay, das ist der Text hier unten (m23, ll. 22-24)
+\end{quote}
+
+Another participant seemed to be confused by the sentiment chart. After he found the explanatory text below the chart, he could continue with the task.
+
+\begin{quote}
+    Screen: Scrollt wieder zum Sentiment-Graphen runter
+    
+    B: Ach aber auch hier kein besonders überraschendes Sentiment. Warte, was... was tut denn hier die blaue?
+
+    Screen: Fährt mit dem Cursor über den Erklärtext unter dem Graphen
+    
+    B: Ah, okay. Joar, okay. Dann... vielleicht doch eher. (m24, ll. 28-31) 
+\end{quote}
+
+One participant explicitly stated that he would have preferred to have the explanation texts \emph{above} the charts.
+
+\begin{quote}
+    Ich glaub das einzige, was ich gemacht hätte, wäre, den Infotext über die Grafik zu packen. Das wär für mich praktischer gewesen, weil dann lese ich erst, was ich sehe, und sehe dann erst die Grafik. Wobei ich jetzt gerade auch nen relativ kleinen Bildschirm habe. (m26, l. 75)
+\end{quote}
+
+However, one participant who studies to become a teacher said that she liked the layout from a pedagogical perspective.
+
+\begin{quote}
+    I: Das heißt, für deinen Lesefluss und das Verständnis wäre es besser gewesen, wenn du den Erklärtext über der Darstellung hast, die erklärt wird?
+
+    B: Das ist ne gute Frage, also ich glaube aus einer Verständnistheoretischen Perspektive ist es wahrscheinlich schlauer, wenn man sich erst die Frage stellt, bisschen irritiert ist und dann die Antwort findet und dann das versteht. Wenn man es erst liest und nicht genau weiß, worauf sich das jetzt bezieht, muss man den Text im Zweifelsfall zwei Mal lesen. Weil dann liest du das halt, denkst "hä?", dann schaust du dir das an und merkst dann, dass du Informationen dazu bekommen hast. Und dann liest du dir das nochmal durch. (w26a, ll. 80-81)
+\end{quote}
+
+\subsubsection*{Word search is a filter}
+This category contains statements where the participants stumbled over the limitations of the word filter. The word filter filters for exact matches of the entered term in the database. This is a difference to search engines like Google or Duck Duck Go: these engines use a so-called \emph{fuzzy search}, which means that results don't only contain the exact search term, but also similar terms.
+
+One participant entered a too specific keyword, but could quickly recover from this:
+
+\begin{quote}
+    Screen: Gibt "Dr. Drosten" in den Suchfilter ein
+
+    B: Dann würd ich eben erst mal Dr. Drosten in diese Suchleiste hier oben eingeben
+
+    Screen: wenige Ergebnisse werden gezeigt
+
+    B: Wobei vielleicht geb ich besser nur "Drosten" ein weil den Doktor... filtern die Leute ja wahrscheinlich raus. (w26b, ll. 37-40)
+\end{quote}
+
+Another participant made a spelling mistake when filtering for a word, which she did not recognize until she was made aware of it:
+
+\begin{quote}
+    Screen: Gibt im Wortfilter "Tonnies" ein, es werden nur sehr wenige Ergebnisse angezeigt
+
+    B: Hm, jetzt seh ich hier gar nix
+
+    I: Du hast T\"onnies falsch geschrieben. Mit O statt mit \"O.
+    
+    B: Aah, I see. 
+
+    Screen: Gibt T\"onnies ein
+
+    B: Okay, und verändert sich jetzt was? Ah ja, okay!  (w26a, ll. 10-15)
+\end{quote}
+
+Without the author's intervention, this participant likely would not have been able to recover from her mistake, thinking that \emph{Tönnies} did not appear in the set of collected tweets.
+
+\subsubsection*{Missing real-world context}
+While the participants were able to identify days with high activity for a specific topic, the dashboard did not offer more information about what happened on that day. Some participants said that they could have used this information to interpret the findings better.
+
+\begin{quote}
+    B: Ganz witzig, am 5. und am 19. Juli gibts hier so... wie nennt man das denn, kein Peak sondern das Gegenteil  eines Peaks wo es dann so krass runtergeht. Das wäre interessant zu wissen, was an diesen Tagen war, ob die Leute da wohl schlechter drauf waren in Bezug auf Corona.  (w26b, l. 18)
+\end{quote}
+
+\subsubsection*{Fetching status was unclear}
+When the word filter is changed, new data is fetched from the database. This means that it takes about five seconds between typing in a new search word and the results for this word being displayed. Participants felt unsure about whether their input had already been processed or if they have to wait a bit longer, as the fetching status was not shown in the interface.
+
+\begin{quote}
+    B: Da geb ich oben in diesem Suchbalken was ein. Da geb ich jetzt Dr. Drosten ein
+
+    Screen: Die Grafik verändert sich, zeigt aber nahezu keine Ergebnisse. 
+
+    B: Und... drücke Enter? Hat sich jetzt schon was getan?
+
+    I: Ja, hat es.
+
+    B: Ach, das hab ich gar nicht gemerkt. (w25, ll. 36-40)
+\end{quote}
+
+\subsubsection*{Unprecise explanations}
+This category contains statements from participants where an explanation for certain elements was given, but the explanation was not satisfactory. This contains unprecise wording or missing further information.
+
+\begin{quote}
+    Sentiment ist noch so... ich weiß noch nicht so ganz, was das heißt. Also klar, was das irgendwie bedeuten soll, aber... wie sieht jetzt zum Beispiel ein positiver Tweet aus oder ein negativer. (m23, l. 73)
+\end{quote}
+
