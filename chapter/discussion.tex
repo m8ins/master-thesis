@@ -43,13 +43,28 @@ Another component that was missing from the interface was an indicator that new 
     \label{fig:fetching_state}
 \end{figure}
 
-TODO: Fehlende Tooltips am Linechart ergänzen
+\subsubsection*{Tooltips for the sentiment graph}
+During the user tests, the participant expected to find tooltips for both graphs once they found the tooltip in the volume graph. This means that tooltips should either be used globally for all visualizations---at least where the additional information provided by the tooltip adds to the value---or not at all. As the tooltip in the volume graph helped participants to further explore 
 
 \subsection{Technical limitations}
-This section discusses findings from the interview where technical limitations hindered participants from solving tasks.
+This section discusses findings from the interview where technical limitations hindered participants from solving tasks. Some of these limitations were conscious trade-offs for this prototype version. Nonetheless, these issues should be adressed if a tool based on this prototype should be further developed.
 
-\begin{enumerate}
-    \item Wort-Filter muss exakt eingegeben werden
-    \item Fester Zeitrahmen der Ergebnisse
-    \item Notebook-Funktionalität?
-\end{enumerate}
+\subsubsection*{Fixed data set}
+The fixed data set came up in one interview where the participant tried to scroll the data set to reveal even more days. This revealed one of the bigger disadvantages of using Twitter's streaming API to collect tweets in real time (see chapter \ref{sec:fetchedData}). Using this method guarantees the most complete data set on the free tier of Twitter's API, at least from the time the data collection is started. The downside is that using this API makes it impossible to access past tweets. Users of the tool thus have to recognize a potentially interesting topic very early, start the data collection, and then wait some time until enough data has been gathered.
+
+Using the paid API to access Twitter's archives could solve this problem, at least in parts. The paid access to Twitter's archives allows to scan the past 30 days of activity on Twitter, which could give a 'headstart' to the data collection. For a final version of this tool, a split approach could be possible: use the real-time data collection of a specific topic using the streaming API, and simultaneously fetch the last 30 days of Twitter activity to this topic. This would mean that users would get direct access to the past month of tweets directly from the beginning of the data collection, elminimating the need to wait some days before they can gather meaningful results from Twitter.
+
+\subsubsection*{Word filter instead of fuzzy search}
+Another problem that nees further technical work is how the word filter operates. The current implementation acts as a case-insensitive filter which looks for parts of words. This means that, if a user enters \emph{App}, tweets containing these sorts of texts will be found:
+
+\begin{itemize}
+    \item I like this \textbf{App} a lot
+    \item Whats\textbf{App} collects your data
+    \item What kind of video \textbf{app} would you recommend?
+    \item I'm not angry, just dis\textbf{app}ointed
+\end{itemize}
+
+This is different from how a search engine, like DuckDuckGo or Google, works. These engines use a so-called \emph{fuzzy search} which not only looks for the word itself, but also catches typos, looks for synonyms, and so on.
+
+Using a fuzzy search would allow users to explore the database more efficiently. During testing, for example, typos would mean that little to no results were found. The participant, however, thought that there was not a lot of Twitter activity about the specific topic. After she was told to correct the typo, she noticed an interesting pattern in the tweet activity and was able to interpet the data further. This means that it could be helpful to implement fuzzy search if the prototype should be further developed.
+
