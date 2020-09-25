@@ -78,7 +78,7 @@ Some participants explicitly said that they would have liked to know what happen
 
 Showing participants the trending topics for specific days could also give them more ideas for topics they could search for. During the free exploration in the interviews, some participants immediately had ideas that they wanted to check in the dataset (see, for example, w26b, l. 9: \say{Ich probier es mal mit Stuttgart denn da gab es ja glaub ich eine der ersten dieser Hygiene-Demos}). Others only explored the data set that was open by default, which was filtered with \emph{Corona}. Showing daily trends could give participants ideas for how to explore the dataset further.
 
-\subsubsection*{Missing examples for the sentiment graph}
+\subsubsection*{Missing examples for the sentiment graph}\label{sec:missingExamples}
 Participants said that they found the sentiment analysis interesting. Some wished for further explanation of how the sentiment is computed and also wished to see examples of Tweets with a sentiment of +1 and a sentiment of -1 (see m23, l. 73: \say{Also klar, was das irgendwie bedeuten soll, aber... wie sieht jetzt zum Beispiel ein positiver Tweet aus oder ein negativer.}).
 The same participant also said that he would have liked some advice on how to correctly interpret the sentiments, as well as potential pitfalls for the analysis that he should take care of. This explanation could be done in a similar form as Google explains the sentiment analysis in their Natural Language API Demo\footnote{https://cloud.google.com/natural-language/natural-language-api-demo, last visited on 24.09.2020}, as seen in figure \ref{fig:sentiment_google}. According to the participants, they would not want such an explanation for every single tweet, but rather for selected examples. This means that these examples could be hard-coded in the interface and would not have to be dynamically generated from the dataset.
 
@@ -95,7 +95,19 @@ When asked to interpret the sentiment graph, multiple participants focused on th
 
 \begin{figure}[htbp]
     \fbox{\includegraphics[width=\linewidth]{images/sentiment_neutral_area.jpg}}
-    \caption{The area containing the neutral tweets is markedm, making it easier to identify spikes above or below the threshold. The screenshot shows the data when filtered for \emph{Drosten}.}
+    \caption{The area containing the neutral tweets is marked, making it easier to identify spikes above or below the threshold. The screenshot shows the data when filtered for \emph{Drosten}.}
     \label{fig:sentiment_neutral_area}
 \end{figure}
 
+\subsection{Motivational factors}
+This section discusses motivational factors that were found during testing and possible ways to further strengthen these points in future developments of the tool.
+
+\subsubsection*{Easily understandable visualizations}
+The participants said that the visualizations were easily understandable. Future development should keep in mind that the ability to quickly understand the visualizations motivated the participants to discuss the results further, rather than being preoccupied trying to understand what the visualization tries to show them.
+
+To keep the visualizations easily readable, the paradigm \emph{One job per visualization} should be followed. The clear separation of concerns between the two visualizations seemed to support the participants when answering questions. If new visualizations should be added to the tool, this should be done in a separate chart, rather than by adding new elements to one of the existing charts.
+
+\subsubsection*{Supporting explanatory texts}
+The explanatory texts helped the participants understanding the visualizations and the capabilities of the tool better. As already discussed in chapter \ref{sec:missingExamples}, these explanatory texts can be further improved, e.g., by adding examples and hints for analyisis.
+
+One thing that could be changed about the explanatory texts is their position. Due to the nature of Observable, which was used to build the prototype, explanatory texts were always visible and did not only show in context. One way to improve 
