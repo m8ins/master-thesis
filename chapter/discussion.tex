@@ -91,7 +91,7 @@ The same participant also said that he would have liked some advice on how to co
 At the same time, other participants said that a lengthy explanation of how the algorithm works would not have helped her and that she preferred not to have additional explanations. This means that an explanation should be an optional interface component, e.g., a tooltip near the sentiment graph. This allows interested users to access the information, while users who do not want to learn more about sentiment analysis can focus on interpreting the data at hand.
 
 \subsubsection*{Neutral tweets-area was not marked as such}
-When asked to interpret the sentiment graph, multiple participants focused on the threshold of ±0.3 for neutral tweets. This threshold was mentioned for the explanation of the \emph{neutral Tweets}-toggle and is, as discussed in chapter 2, a common threshold to differentiate between neutral Tweets and Tweets that carry an opinion. The participants looked for peaks above or below ±0.3 to find days where the discourse on twitter was especially emotional. This could be facilitated by marking this area in the chart itself, similar as the 0-baseline was marked. 
+When asked to interpret the sentiment graph, multiple participants focused on the threshold of ±0.3 for neutral tweets. This threshold was mentioned for the explanation of the \emph{neutral Tweets}-toggle and is, as discussed in chapter 2, a common threshold to differentiate between neutral Tweets and Tweets that carry an opinion. The participants looked for peaks above or below ±0.3 to find days where the discourse on twitter was especially emotional. This could be facilitated by marking this area in the chart itself, similar to how the 0-baseline was marked. 
 
 \begin{figure}[htbp]
     \fbox{\includegraphics[width=\linewidth]{images/sentiment_neutral_area.jpg}}
@@ -105,9 +105,19 @@ This section discusses motivational factors that were found during testing and p
 \subsubsection*{Easily understandable visualizations}
 The participants said that the visualizations were easily understandable. Future development should keep in mind that the ability to quickly understand the visualizations motivated the participants to discuss the results further, rather than being preoccupied trying to understand what the visualization tries to show them.
 
-To keep the visualizations easily readable, the paradigm \emph{One job per visualization} should be followed. The clear separation of concerns between the two visualizations seemed to support the participants when answering questions. If new visualizations should be added to the tool, this should be done in a separate chart, rather than by adding new elements to one of the existing charts.
+To keep the visualizations easily readable, the paradigm \emph{One job per visualization} should be followed. The clear separation of concerns between the two visualizations seemed to support the participants when answering questions. 
+
+If new visualizations should be added to the tool, this should be done in a separate chart, rather than by adding new elements to one of the existing charts.
+
+The separation of the visualizations could be deepened even further by showing the different visualizations in different tabs. During the user tests, the participants rarely referred to the other visualization during interpretation.
 
 \subsubsection*{Supporting explanatory texts}
-The explanatory texts helped the participants understanding the visualizations and the capabilities of the tool better. As already discussed in chapter \ref{sec:missingExamples}, these explanatory texts can be further improved, e.g., by adding examples and hints for analyisis.
+The explanatory texts helped the participants understanding the visualizations and the capabilities of the tool better. As already discussed in chapter \ref{sec:missingExamples}, these explanatory texts can be further improved, e.g., by adding examples and hints for analysis.
 
-One thing that could be changed about the explanatory texts is their position. Due to the nature of Observable, which was used to build the prototype, explanatory texts were always visible and did not only show in context. One way to improve 
+One thing that could be changed about the explanatory texts is their position. Due to the nature of Observable, which was used to build the prototype, explanatory texts were always visible and did not only show in context. One way to further improve the way the texts are presented is by visually hiding some of the texts in the interface. For this, texts should be divided into two kinds:
+\begin{enumerate}
+    \item Texts that are essential to understanding the visualizations
+    \item Texts that offer additional help, insights, explanations, or inspiration for analyzing the dataset
+\end{enumerate}
+
+Dividing texts into these two categories could yield a less cluttered interface. Important texts from the first category can be always shown, while texts that fall into the second category can be hidden, e.g., in tooltips or detail panes. Showing only necessary texts also means that the visualizations are front-and-center in the tool. It would also eliminate the need to scroll a lot when accessing the tool from a laptop or tablet (cf. m26, l. 75).
