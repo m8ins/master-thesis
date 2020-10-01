@@ -9,7 +9,7 @@ Multiple participants had trouble recognizing what data filters were applied for
 
 \begin{figure}[htbp]
     \fbox{\includegraphics[width=\linewidth]{images/amazon_filters.jpg}}
-    \caption{The Amazon search is filtered to English-language books which are eligible to prime-shipping, with the search input \emph{don't make me think}}
+    \caption{The Amazon search is filtered to English-language books which are eligible to prime-shipping, with the search input \emph{don't make me think}. Highlight by the author}
     \label{fig:amazon_filters}
 \end{figure}
 
@@ -35,16 +35,16 @@ Figure \ref{fig:legend_and_filters} shows a proposed addition to the tweet volum
 The added legend could also help solve the layout problem that participants mentioned. With the explanatory texts no longer necessary to understand the graphs, the texts serve as an additional explanation and, as such, can remain below the graph itself.
 
 \subsubsection*{Loading indicator}
-Another component that was missing from the interface was an indicator that new data was fetched from the server. One possibility to show this fetching would be to show a small loading indicator next to the word filter. This, however, could be not visible enough. Another possibility would be to show in the visualizations themselves that new data is being fetched. As fetching takes about 5 seconds and the visualizations have not been updated before the fetching is complete, it should not be a big problem to visually hide the visualizations during the fetching stage. A possible solution for this can be seen in figure \ref{fig:fetching_state}.
+Another component that was missing from the interface was an indicator that new data was fetched from the server. One possibility to show this fetching would be to show a small loading indicator next to the word filter. However, this could hide the loading indicator. Another possibility would be to show in the visualizations themselves that new data is being fetched. As fetching takes about 5 seconds and the visualizations have not been updated before the fetching is complete, it should not be a big problem to visually hide the visualizations during the fetching stage. A possible solution for this can be seen in figure \ref{fig:fetching_state}.
 
-\begin{figure}[htbp]
+\begin{figure}[htb]
     \fbox{\includegraphics[width=\linewidth]{images/fetching_state.png}}
     \caption{Proposed solution to show that new data is being retrieved from the server}
     \label{fig:fetching_state}
 \end{figure}
 
 \subsubsection*{Tooltips for the sentiment graph}
-During the user tests, the participant expected to find tooltips for both graphs once they found the tooltip in the volume graph. This means that tooltips should either be used globally for all visualizations---at least where the additional information provided by the tooltip adds to the value---or not at all. As the tooltip in the volume graph helped participants to further explore the dataset, it should be kept for all the visualizations.
+During the user tests, the participants expected to find tooltips for both graphs once they found the tooltip in the volume graph. This means that tooltips should either be used globally for all visualizations, at least where the additional information provided by the tooltip adds to the value. Alternatively, no tooltips at all could be used. As the tooltip in the volume graph helped participants to further explore the dataset, it should be kept for all the visualizations.
 
 \subsection{Hindering factors: Technical limitations}
 This section discusses findings from the interview where technical limitations hindered participants from solving tasks. Some of these limitations were conscious trade-offs for this prototype version. This was already discussed in chapter \ref{sec:cutForTime}. Nonetheless, these issues should be addressed if a tool based on this prototype should be further developed.
@@ -55,6 +55,23 @@ The fixed data set came up in one interview where the participant tried to scrol
 Using the paid API to access Twitter's archives could solve this problem, at least in parts. The paid access to Twitter's archives gives access to the past 30 days of activity on Twitter, which could give a 'headstart' to the data collection. For a final version of this tool, a combined approach could be possible: using the real-time data collection of a specific topic with the streaming API, and simultaneously fetching the last 30 days of Twitter activity to this topic. This would mean that users would be able to analyze the past month of tweets directly from the beginning of the data collection, eliminating the need to wait some days before they can gather meaningful results from Twitter.
 
 If this approach would be used, the data collection pipeline would have to be modified a bit further. In the current implementation, the sentiment of a tweet is computed synchronously when the tweet is sent to the collecting app by the streaming API. The data sent by the Twitter archive may be too big to compute the sentiment synchronously. In this case, users should get a message that the sentiment is being computed, but that they can already start analyzing the volume graph.
+
+Allowing users to explore a bigger data set could mean that the way the data set is presented has to be changed. One example of showing a data set that spans multiple months can be seen on Spiegel Online (\cite{merlotCoronavirusBrasilienManaus2020}).
+
+\begin{figure}[htb!]
+    \fbox{\includegraphics[width=\linewidth]{images/spiegel_visualization.png}}
+    \caption{A coronavirus visualization from Spiegel Online. The buttons on top select the time frame that should be displayed. The scroll bar below the chart allows users to move the viewport to explore other parts of the dataset. Users can also drag the size of the scroll bar to change the time frame that is displayed. Taken from \cite{merlotCoronavirusBrasilienManaus2020}.}
+    \label{fig:spiegel_visualization}
+\end{figure}
+
+The chart showing the new infections and corona-related casualties in Brasil can be manipulated by users in different ways:
+\begin{itemize}
+    \item Buttons on top of the chart let users switch the scope of the data set between 1 month, 3 months, and the whole data set.
+    \item The scroll bar allows users to move their selected time frame. This means they can see data from the last three months starting today, from the last three months starting next week, or wherever users move the scroll bar.
+    \item The scroll bar can also be resized. By doing this, users can choose a time frame other than the default three options.
+\end{itemize}
+
+Similar to what was already mentioned in this discussion, the visualization from Spiegel Online also has a tooltip which shows more detailed information and a visual legend that explains the colors in the graph. 
 
 \subsubsection*{Word filter instead of fuzzy search}
 Another problem that needs further technical work is how the word filter works. The current implementation acts as a case-insensitive filter that looks for parts of words. This means that, if a user enters \emph{App}, tweets containing these sorts of texts will be found:
@@ -68,7 +85,7 @@ Another problem that needs further technical work is how the word filter works. 
 
 This is different from how search engines, like DuckDuckGo, Google, or Bing, work. These engines use a so-called \emph{fuzzy search} which not only looks for the word itself, but also catches typos, looks for synonyms, and so on.
 
-Using a fuzzy search would allow users to explore the database more efficiently. During testing, for example, typos in the filter field would mean that little to no results were found (assuming that most of the Twitter users wrote the word correctly). Participants thought that there was not a lot of Twitter activity about the specific topic they were interested in. After one participant was told to correct the typo, she noticed an interesting pattern in the tweet activity and was able to interpret the data further. This means that it could be helpful to implement a fuzzy search if the prototype should be further developed.
+Using a fuzzy search would allow users to explore the database more efficiently. During testing, for example, it was shown that typos in the filter field would mean that little to no results were found (assuming that most of the Twitter users wrote the word correctly). The participant in question thought that there was not a lot of Twitter activity about the specific topic she was interested in. After one participant was told to correct the typo, she noticed an interesting pattern in the tweet activity and was able to interpret the data further. This means that it could be helpful to implement a fuzzy search if the prototype should be further developed.
 
 \subsection{Hindering factors: missing information}
 This section is about pieces of information that participants said they would expect to interpret the data more efficiently. 
