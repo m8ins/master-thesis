@@ -2,7 +2,7 @@
 This section will discuss the findings from the interview study. For problems that were mentioned in the user tests, a possible solution will be discussed. For motivational factors, ways to further improve these factors will be taken into consideration.
 
 \subsection{Hindering factors: missing interface components}
-In the following subsection, problems that can be solved with additional interface components will be discussed.
+Some of the problems that were already discussed can be solved by introducing additional interface components. The problems and their proposed solutions are discussed in this section.
 
 \subsubsection*{Overview of currently set filters}
 Multiple participants had trouble recognizing what data filters were applied for the current visualization. The idea that the filters can be changed on top of the notebook and will then influence the rest of the visualization does not seem to work, especially on smaller laptops, as this resulted in a lot of scrolling.
@@ -44,7 +44,7 @@ Another component that was missing from the interface was an indicator that new 
 \end{figure}
 
 \subsubsection*{Tooltips for the sentiment graph}
-During the user tests, the participants expected to find tooltips for both graphs once they found the tooltip in the volume graph. This means that tooltips should either be used globally for all visualizations, at least where the additional information provided by the tooltip adds to the value. Alternatively, no tooltips at all could be used. As the tooltip in the volume graph helped participants to further explore the dataset, it should be kept for all the visualizations.
+During the user tests, the participants expected to find tooltips for both graphs once they found the tooltip in the volume graph. This means that tooltips should either be used globally for all visualizations, at least where the additional information provided by the tooltip adds to the value. Alternatively, no tooltips at all could be used. As the tooltip in the volume graph helped participants to further explore the dataset, it should be kept for all the visualizations. Those tooltips would also satisfy \citeauthor{shneidermanEyesHaveIt1996}'s \emph{details-on-demand} by showing additional information when the user wants to see them, instead of cluttering the interface.
 
 \subsection{Hindering factors: Technical limitations}
 This section discusses findings from the interview where technical limitations hindered participants from solving tasks. Some of these limitations were conscious trade-offs for this prototype version. This was already discussed in chapter \ref{sec:cutForTime}. Nonetheless, these issues should be addressed if a tool based on this prototype should be further developed.
@@ -88,7 +88,7 @@ This is different from how search engines, like DuckDuckGo, Google, or Bing, wor
 Using a fuzzy search would allow users to explore the database more efficiently. During testing, for example, it was shown that typos in the filter field would mean that little to no results were found, assuming that most of the Twitter users wrote the word correctly. The participant in question thought that there was not a lot of Twitter activity about the specific topic she was interested in. After one participant was told to correct the typo, she noticed an interesting pattern in the tweet activity and was able to interpret the data further. This means that it could be helpful to implement a fuzzy search if the prototype should be further developed.
 
 \subsection{Hindering factors: missing information}
-This section is about pieces of information that participants said they would expect to interpret the data more efficiently. This information can be textual or visual: Textual information means written text, some additional explanation of how to work with the tool, or more detailed information. Visual information means, for example, more emphasis on certain aspects of the charts, or highlighted information.
+The contents of this section are about pieces of information that participants said they would expect to interpret the data more efficiently. This information can be textual or visual: Textual information means written text, some additional explanation of how to work with the tool, or more detailed information. Visual information means, for example, more emphasis on certain aspects of the charts, or highlighted information.
 
 \subsubsection*{Missing real-world context}
 As discussed in chapter \ref{sec:fetchedData}, one idea that was not implemented due to time constraints was to give participants some context as to what happened on specific days based on the tweet-texts themselves. Because the calculated collocations did not yield satisfying results, this feature was not implemented for the prototype of the dashboard.
@@ -124,7 +124,7 @@ When asked to interpret the sentiment graph, multiple participants focused on th
 \end{figure}
 
 \subsection{Motivational factors}
-This section discusses motivational factors that were found during testing and possible ways to further strengthen these points in future developments of the tool.
+During the coding process of the interviews several factors that motivated participants to use the prototype were found. Here, these motivational factors that were found during testing are discussed. Possible ways to further strengthen these points in future developments of the tool are proposed in this section.
 
 \subsubsection*{Easily understandable visualizations}
 The participants said that the visualizations were easily understandable. Future development should keep in mind that the ability to quickly understand the visualizations motivated the participants to discuss the results further, rather than being preoccupied trying to understand what the visualization tries to show them.

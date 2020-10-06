@@ -16,7 +16,7 @@ From the returned Tweet Objects\footnote{The documentation on what data a Tweet 
 \item \textbf{The user name of the tweet author.} As discussed above, opinion leadership is also a phenomenon on Twitter. Collecting user names allows, e.g., to analyze which users tweet the most.
 \item \textbf{The user's self-description.} Users on Twitter can enter a short description, the so-called \emph{bio}.
 \item \textbf{The user's friend count.} This shows how many other accounts the user in question is following.
-\item \textbf{The user's follower count.} This shows how many other accounts follow the user in question. \footnote{The definitions for a user's friend count and follower count can be found here: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/overview}
+\item \textbf{The user's follower count.} This shows how many other accounts follow the user in question.\footnote{The definitions for a user's friend count and follower count can be found here: https://developer.twitter.com/en/docs/accounts-and-users/follow-search-get-users/overview}
 \item \textbf{The country from which the tweet was sent.} Twitter also offers coordinate-based geolocations, but choosing the country instead seemed to honor the user's privacy more.
 \item \textbf{Whether the account is verified or not.}
 \item \textbf{The source of the tweet.} This shows if the tweet came from the web app, a desktop app, a mobile app, a 3rd party-application, or other sources.
@@ -93,7 +93,7 @@ Because of this, the chart was changed to a bar chart, as seen in figure \ref{fi
 
 Using Chrome's responsive design inspector, the bar chart was pre-tested across multiple device sizes and appeared to be usable even on 11-inch displays without horizontal scrolling. The final user tests all used the bar chart visualization for the tweet volume.
 
-\begin{figure}[h!tb]
+\begin{figure}[htb]
     \fbox{\includegraphics[width=\linewidth]{images/volume_barchart.jpg}}
     \caption{The daily tweet volume as a bar chart. This example shows the distribution of the word \emph{App}.}
     \label{fig:volume_barchart}
@@ -102,7 +102,7 @@ Using Chrome's responsive design inspector, the bar chart was pre-tested across 
 The graph which shows the development of the sentiment over time is a line chart. This visualization was chosen because the sentiment can also show negative values, as its domain ranges from -1 to +1. 
 % TODO Does this make sense? Why didn't I choose a bar chart? The line chart felt like the more natural choice here, but y tho?
 
-\begin{figure}[h!tb]
+\begin{figure}[htb]
     \fbox{\includegraphics[width=\linewidth]{images/sentiment_linechart.jpg}}
     \caption{The average sentiment per day. The blue line shows the average sentiment of tweets containing the word \emph{App}, the red line shows the sentiment of tweets not containing this word.}
     \label{fig:sentiment_linechart}
