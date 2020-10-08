@@ -11,6 +11,8 @@ This section describes the results of the interview study. First, a brief overvi
 \subsection{Sample description}
 For the qualitative user study, six participants between the age of 23 and 26 were recruited. The study was limited to six participants because studies have shown that five to six user tests already uncover around 80\% of usability problems (\cite{10.1145/169059.169166}).
 
+%TODO: grafische Aufbereitung der Ergebnisse des Screening-Fragebogens?
+
 3 participants identify themselves as male, 3 participants as female. The participants were chosen because they have little to no knowledge of big data and data visualization. This qualifies them as \emph{laymen}, the target group of this study.
 
 Participants were asked to rate their interaction levels with twitter on a 6-point Likert scale from 1 – never to 6 – daily.
@@ -33,7 +35,7 @@ Others found the impact of retweets on the overall sentiment interesting:
     Ich fands sehr interessant zu sehen, wie so Retweets die Stimmung beeinflussen. (w25, l. 80)
 \end{quote}
 
-Participants also expressed that they liked to have the ability to see how a certain topic was discussed by the German Twittersphere:
+Participants also expressed that they liked to have the ability to see how a certain topic was discussed by the German Twitter-sphere:
 
 \begin{quote}
     Aber ja, das ist schon interessant da mal nen Begriff reinzutippen und zu gucken, was passiert. (m24, l. 82)
@@ -102,7 +104,7 @@ Another participant liked that the tasks asked them to reflect on what they coul
 \end{quote}
 
 \subsubsection*{Tooltip with further information}
-As discussed in the previous section, the tooltip could only be realized in the graph that showed the tweet volume over time. This tooltip helped participants to explore the data set more efficiently:
+As discussed in the section \ref{sec:cutForTime}, the tooltip could only be realized in the graph that showed the tweet volume over time. This tooltip helped participants to explore the data set more efficiently:
 
 \begin{quote}
     Screen: Hovert mit dem Mauszeiger über den längsten Balken
@@ -123,7 +125,7 @@ Another participant said she was able to learn more about the way Twitter works 
 \end{quote}
 
 \subsubsection*{Guide lines in visualization}
-Some participants voiced the usefulness of the guideline marking the 0-line in the line graph showing the sentiment (see figure \ref{fig:sentiment_linechart}):
+Some participants voiced the usefulness of the guideline marking the 0-line in the line graph showing the sentiment (see Figure \ref{fig:sentiment_drosten_noneutral}):
 
 \begin{quote}
     Ich würde sagen, also die Linie bewegt sich schon im Durchschnitt oberhalb des 0-Wertes hier, aber hier an manchen Tagen reißt sie deutlich nach unten ein. (w26a, l. 66)
@@ -168,6 +170,7 @@ One participant also said that having to constantly scroll up to the filter stat
 Legends are used in color-coded graphs so that users can map the used colors to their meaning. An example of this can be seen in figure \ref{fig:legend_example}.
 
 \begin{figure}[h!tb]
+    \centering
     \fbox{\includegraphics[width=0.7\linewidth]{images/legend_example.jpg}}
     \caption{Example of a legend. Screenshot from https://observablehq.com/@cahaber/cartesian-legend, highlight by the author}
     \label{fig:legend_example}
@@ -248,7 +251,7 @@ However, one participant who studies to become a teacher said that she liked the
 \end{quote}
 
 \subsubsection*{Word search is a filter}
-This category contains statements where the participants stumbled over the limitations of the word filter. The word filter filters for exact matches of the entered term in the database. This is a difference to search engines like Google or Duck Duck Go: these engines use a so-called \emph{fuzzy search}, which means that results do not only contain the exact search term, but also similar terms.
+This category contains statements where the participants stumbled over the limitations of the word filter. The word filter filters for exact matches of the entered term in the database. This is a difference to search engines like Google or DuckDuckGo: these engines use a so-called \emph{fuzzy search}, which means that results do not only contain the exact search term, but also similar terms.
 
 One participant entered a too specific keyword, but could quickly recover from this:
 

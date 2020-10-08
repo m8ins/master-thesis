@@ -1,8 +1,8 @@
 \section{Discussion}
-This section will discuss the findings from the interview study. For problems that were mentioned in the user tests, a possible solution will be discussed. For motivational factors, ways to further improve these factors will be taken into consideration.
+This section will discuss the findings from the interview study. For hindering factors that were found, a possible solution will be discussed. For motivational factors, ways to further improve these factors will be taken into consideration.
 
 \subsection{Hindering factors: missing interface components}
-Some of the problems that were already discussed can be solved by introducing additional interface components. The problems and their proposed solutions are discussed in this section.
+Some of the problems that were mentioned can be solved by introducing additional interface components. The problems and their proposed solutions are discussed in this section.
 
 \subsubsection*{Overview of currently set filters}
 Multiple participants had trouble recognizing what data filters were applied for the current visualization. The idea that the filters can be changed on top of the notebook and will then influence the rest of the visualization does not seem to work, especially on smaller laptops, as this resulted in a lot of scrolling.
@@ -25,7 +25,9 @@ This means that the filter status should be visible directly next to the visuali
     \label{fig:legend_and_filters}
 \end{figure}
 
-Showing the filter toggles right next to the visualizations seems like a straightforward idea. However, this raises the question if the filters of the two visualizations should be linked or not, i.e., should the filter of the sentiment graph change as well when the filter of the volume graph is changed or not. To decide this, further studies should be conducted to see if the synchronicity of the data visualizations is helpful or not. This study did not examine if it helps users to have a single filter context within several visualizations or not. During the exploration phase in the interview, however, the participants did not seem to switch a lot between examining the tweet volume and the sentiment chart. This could suggest that having a single filter applied to both visualizations is not a necessity. In this case, using two filter sets that are independent of each other could avoid user confusion as only explicit user actions influence the visualization.
+Showing the filter toggles right next to the visualizations seems like a straightforward idea. However, this raises the question if the filters of the two visualizations should be linked or not, i.e., should the filter of the sentiment graph change as well when the filter of the volume graph is changed or not. To decide this, further studies should be conducted to see if the synchronicity of the data visualizations is helpful or not.
+
+This study did not examine if it helps users to have a single filter context within several visualizations or not. During the exploration phase in the interview, however, the participants did not seem to switch a lot between examining the tweet volume and the sentiment chart. This could suggest that having a single filter applied to both visualizations is not a necessity. In this case, using two filter sets that are independent of each other could avoid user confusion as only explicit user actions influence the visualization.
 
 \subsubsection*{Color legend}
 Another missing interface component are colored legends. During user testing, several problems arose because of the missing legend. For one, the graphs were less self-contained. Users were forced to read the explanatory texts that accompanied the graphs to be able to understand what the different colors mean. Another problem with the textual explanation of colors was that different participants would have named the colors differently than the text did and where confused, e.g., when the text talked about a light-red line, but the participants only identified an orange one. A legend like the one shown in figure \ref{fig:legend_example} could have helped identifying the colors more easily, as well as making the graph more self-explanatory.
@@ -35,7 +37,9 @@ Figure \ref{fig:legend_and_filters} shows a proposed addition to the tweet volum
 The added legend could also help solve the layout problem that participants mentioned. With the explanatory texts no longer necessary to understand the graphs, the texts serve as an additional explanation and, as such, can remain below the graph itself.
 
 \subsubsection*{Loading indicator}
-Another component that was missing from the interface was an indicator that new data was fetched from the server. One possibility to show this fetching would be to show a small loading indicator next to the word filter. However, this could hide the loading indicator. Another possibility would be to show in the visualizations themselves that new data is being fetched. As fetching takes about 5 seconds and the visualizations have not been updated before the fetching is complete, it should not be a big problem to visually hide the visualizations during the fetching stage. A possible solution for this can be seen in figure \ref{fig:fetching_state}.
+Another component that was missing from the interface was an indicator that new data was fetched from the server. One possibility to show this fetching would be to show a small loading indicator next to the word filter. However, this position could hide the loading indicator, making it not noticeable enough.
+
+Another possibility would be to show in the visualizations themselves that new data is being fetched. As fetching takes about 5 seconds and the visualizations have not been updated before the fetching is complete, it should not be a big problem to visually hide the visualizations during the fetching stage. A possible solution for this can be seen in figure \ref{fig:fetching_state}.
 
 \begin{figure}[htb]
     \fbox{\includegraphics[width=\linewidth]{images/fetching_state.png}}
@@ -50,7 +54,7 @@ During the user tests, the participants expected to find tooltips for both graph
 This section discusses findings from the interview where technical limitations hindered participants from solving tasks. Some of these limitations were conscious trade-offs for this prototype version. This was already discussed in chapter \ref{sec:cutForTime}. Nonetheless, these issues should be addressed if a tool based on this prototype should be further developed.
 
 \subsubsection*{Fixed data set}
-The fixed data set came up in one interview where the participant tried to scroll the data set to reveal even more days. This revealed one of the biggest disadvantages of using Twitter's streaming API to collect tweets in real-time (see chapter \ref{sec:fetchedData}). Using this method guarantees the most complete data set on the free tier of Twitter's API, at least from the time the data collection is started. The downside is that using this API makes it impossible to access past tweets. Users of the tool have to recognize a potentially interesting topic very early, start the data collection, and then wait some time until enough data has been gathered.
+The fixed data set came up in one interview where the participant tried to scroll the data set to reveal even more days. This revealed one of the biggest disadvantages of using Twitter's streaming API to collect tweets in real-time (see section \ref{sec:fetchedData}). Using this method guarantees the most complete data set on the free tier of Twitter's API, at least from the time the data collection is started. The downside is that using this API makes it impossible to access past tweets. Users of the tool have to recognize a potentially interesting topic very early, start the data collection, and then wait some time until enough data has been gathered.
 
 Using the paid API to access Twitter's archives could solve this problem, at least in parts. The paid access to Twitter's archives gives access to the past 30 days of activity on Twitter, which could give a 'headstart' to the data collection. For a final version of this tool, a combined approach could be possible: using the real-time data collection of a specific topic with the streaming API, and simultaneously fetching the last 30 days of Twitter activity to this topic. This would mean that users would be able to analyze the past month of tweets directly from the beginning of the data collection, eliminating the need to wait some days before they can gather meaningful results from Twitter.
 
@@ -83,15 +87,15 @@ Another problem that needs further technical work is how the word filter works. 
     \item I'm not angry, just dis\textbf{app}ointed
 \end{itemize}
 
-This is different from how search engines, like DuckDuckGo, Google, or Bing, work. These engines use a so-called \emph{fuzzy search} which not only looks for the word itself, but also catches typos, looks for synonyms, and so on.
+This is different from how search engines, like DuckDuckGo, Google, or Bing, work. These engines use a so-called \emph{fuzzy search} which not only looks for the word itself, but also catches typographic mistakes, looks for synonyms, and so on.
 
-Using a fuzzy search would allow users to explore the database more efficiently. During testing, for example, it was shown that typos in the filter field would mean that little to no results were found, assuming that most of the Twitter users wrote the word correctly. The participant in question thought that there was not a lot of Twitter activity about the specific topic she was interested in. After one participant was told to correct the typo, she noticed an interesting pattern in the tweet activity and was able to interpret the data further. This means that it could be helpful to implement a fuzzy search if the prototype should be further developed.
+Using a fuzzy search would allow users to explore the database more efficiently. During testing, for example, it was shown that typographic mistakes in the filter field would mean that little to no results were found, assuming that most of the Twitter users wrote the word correctly. The participant in question thought that there was not a lot of Twitter activity about the specific topic she was interested in. After one participant was told to correct the typo, she noticed an interesting pattern in the tweet activity and was able to interpret the data further. This means that it could be helpful to implement a fuzzy search if the prototype should be developed further.
 
 \subsection{Hindering factors: missing information}
 The contents of this section are about pieces of information that participants said they would expect to interpret the data more efficiently. This information can be textual or visual: Textual information means written text, some additional explanation of how to work with the tool, or more detailed information. Visual information means, for example, more emphasis on certain aspects of the charts, or highlighted information.
 
 \subsubsection*{Missing real-world context}
-As discussed in chapter \ref{sec:fetchedData}, one idea that was not implemented due to time constraints was to give participants some context as to what happened on specific days based on the tweet-texts themselves. Because the calculated collocations did not yield satisfying results, this feature was not implemented for the prototype of the dashboard.
+As discussed in section \ref{sec:cutForTime}, one idea that was not implemented due to time constraints was to give participants some context as to what happened on specific days based on the tweet-texts themselves. Because the calculated collocations did not yield satisfying results, this feature was not implemented for the prototype of the dashboard.
 
 Some participants explicitly said that they would have liked to know what happened on specific days, especially when they recognized spikes in Twitter activity for a topic or spikes in the sentiment on a specific day. Further development of the tool should take this into account and, e.g., collect daily Twitter trends using the Trend API\footnote{https://developer.twitter.com/en/docs/twitter-api/v1/trends/trends-for-location/api-reference/get-trends-place, last visited on 24.09.2020}. This would allow participants to analyze the dataset more thoroughly. In several interviews, participants said that they would have wanted more context to understand spikes in the tweet volume or the sentiment graph. They expected this information to be present in the prototype itself, and no participant searched on the internet for further information on what happened on these days.
 
@@ -114,7 +118,7 @@ The same participant also said that he would have liked some advice on how to co
 At the same time, other participants said that a lengthy explanation of how the algorithm works would not have helped her and that she preferred not to have additional explanations. This means that an explanation should be an optional interface component, e.g., a tooltip near the sentiment graph. This allows interested users to access the information, while users who do not want to learn more about sentiment analysis can focus on interpreting the data at hand.
 
 \subsubsection*{Neutral tweets-area was not marked as such}
-When asked to interpret the sentiment graph, multiple participants focused on the threshold of ±0.3 for neutral tweets. This threshold was mentioned for the explanation of the \emph{neutral Tweets}-toggle and is, as discussed in chapter 2, a common threshold to differentiate between neutral Tweets and Tweets that carry an opinion. The participants looked for peaks above or below ±0.3 to find days where the discourse on twitter was especially emotional. This could be facilitated by marking this area in the chart itself, similar to how the 0-baseline was marked. 
+When asked to interpret the sentiment graph, multiple participants focused on the threshold of ±0.3 for neutral tweets. This threshold was mentioned for the explanation of the \emph{neutral Tweets}-toggle and is, as discussed in chapter 2, a common threshold to differentiate between neutral Tweets and Tweets that carry an opinion. The participants looked for peaks above or below ±0.3 to find days where the discourse on twitter was especially emotional. This could be facilitated by marking this area in the chart itself, similar to how the 0-baseline was marked. An example for this can be seen in Figure \ref{fig:sentiment_neutral_area}.
 
 \begin{figure}[htb]
     \centering
@@ -124,14 +128,12 @@ When asked to interpret the sentiment graph, multiple participants focused on th
 \end{figure}
 
 \subsection{Motivational factors}
-During the coding process of the interviews several factors that motivated participants to use the prototype were found. Here, these motivational factors that were found during testing are discussed. Possible ways to further strengthen these points in future developments of the tool are proposed in this section.
+During the coding process of the interviews, several factors that motivated participants to use the prototype were found. Here, these motivational factors that were found during testing are discussed. Possible ways to further strengthen these points in future developments of the tool are proposed in this section.
 
 \subsubsection*{Easily understandable visualizations}
 The participants said that the visualizations were easily understandable. Future development should keep in mind that the ability to quickly understand the visualizations motivated the participants to discuss the results further, rather than being preoccupied trying to understand what the visualization tries to show them.
 
-To keep the visualizations easily readable, the paradigm \emph{One job per visualization} should be followed. The clear separation of concerns between the two visualizations seemed to support the participants when answering questions. 
-
-If new visualizations should be added to the tool, this should be done in a separate chart, rather than by adding new elements to one of the existing charts.
+To keep the visualizations easily readable, the paradigm \emph{one job per visualization} should be followed. The clear separation of concerns between the two visualizations seemed to support the participants when answering questions. If new visualizations should be added to the tool, this should be done in a separate chart, rather than by adding new elements to one of the existing charts.
 
 The separation of the visualizations could be deepened even further by showing the different visualizations in different tabs. During the user tests, the participants rarely referred to the other visualization during interpretation.
 
