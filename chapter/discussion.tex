@@ -48,10 +48,10 @@ Another possibility would be to show in the visualizations themselves that new d
 \end{figure}
 
 \subsubsection*{Tooltips for the sentiment graph}
-During the user tests, the participants expected to find tooltips for both graphs once they found the tooltip in the volume graph. This means that tooltips should either be used globally for all visualizations, at least where the additional information provided by the tooltip adds to the value. Alternatively, no tooltips at all could be used. As the tooltip in the volume graph helped participants to further explore the dataset, it should be kept for all the visualizations. Those tooltips would also satisfy \citeauthor{shneidermanEyesHaveIt1996}'s \emph{details-on-demand} by showing additional information when the user wants to see them, instead of cluttering the interface.
+During the user tests, the participants expected to find tooltips for both graphs once they found the tooltip in the volume graph. This means that tooltips should either be used globally for all visualizations, at least where the additional information provided by the tooltip adds to the value. Alternatively, no tooltips at all could be used. As the tooltip in the volume graph helped participants to further explore the dataset, it should be kept for all the visualizations. Those tooltips would also satisfy \citeauthor{shneidermanEyesHaveIt1996}'s \emph{details-on-demand} by showing additional information when the user wants to see them, instead of cluttering the interface. Because of the way the tooltips were implemented in this prototype, they could not be added to the sentiment graph. More on this limitation can be found in Section \ref{fw_tooltips}.
 
 \subsection{Hindering factors: Technical limitations}
-This section discusses findings from the interview where technical limitations hindered participants from solving tasks. Some of these limitations were conscious trade-offs for this prototype version. This was already discussed in chapter \ref{sec:cutForTime}. Nonetheless, these issues should be addressed if a tool based on this prototype should be further developed.
+This section discusses findings from the interview where technical limitations hindered participants from solving tasks. Some of these limitations were conscious trade-offs for this prototype version. Nonetheless, these issues should be addressed if a tool based on this prototype should be further developed.
 
 \subsubsection*{Fixed data set}
 The fixed data set came up in one interview where the participant tried to scroll the data set to reveal even more days. This revealed one of the biggest disadvantages of using Twitter's streaming API to collect tweets in real-time (see section \ref{sec:fetchedData}). Using this method guarantees the most complete data set on the free tier of Twitter's API, at least from the time the data collection is started. The downside is that using this API makes it impossible to access past tweets. Users of the tool have to recognize a potentially interesting topic very early, start the data collection, and then wait some time until enough data has been gathered.
@@ -127,6 +127,7 @@ When asked to interpret the sentiment graph, multiple participants focused on th
     \label{fig:sentiment_neutral_area}
 \end{figure}
 
+\clearpage
 \subsection{Motivational factors}
 During the coding process of the interviews, several factors that motivated participants to use the prototype were found. Here, these motivational factors that were found during testing are discussed. Possible ways to further strengthen these points in future developments of the tool are proposed in this section.
 

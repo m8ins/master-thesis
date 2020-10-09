@@ -27,14 +27,14 @@ From the returned Tweet Objects\footnote{The documentation on what data a Tweet 
 
 Twitter offers two different methods to automatically collect tweets:
 \begin{enumerate}
-    \item \textbf{Twitter's Archive API} allows users to programmatically search for content in Twitter's archives. There are several levels of access to this API. The free tier gives access to data from the last seven days. Paid tiers give access to up to 30 days. As discussed above, access is limited to 1\% of the global tweet volume at any time, no matter the tier. The API grants access to tweets on a randomized basis.
-    \item \textbf{Twitter's Streaming API} works differently. Instead of accessing an asynchronous archive on Twitter's servers, the Streaming API pushes tweets that match the searching criteria to an endpoint the moment a tweet is sent. The Streaming API does not grant access to tweets that were already sent before the collection started, though.
+    \item \textbf{Twitter's Archive API} allows users to automatically search for content in Twitter's archives. There are several levels of access to this API. The free tier gives access to data from the last seven days. Paid tiers give access to up to 30 days. As discussed above, access is limited to 1\% of the global tweet volume at any time, no matter the tier. The API grants access to tweets on a randomized basis.
+    \item \textbf{Twitter's Streaming API} works differently from this. Instead of accessing an asynchronous archive on Twitter's servers, the Streaming API pushes tweets that match the searching criteria to an endpoint the moment a tweet is sent. The Streaming API does not grant access to tweets that were already sent before the collection started, though.
 \end{enumerate}
 
 The Streaming API was used as it gives the most complete data set on Twitter's free tier (\cite{brunsTwitterDataWhat2014}). It pushes (or streams) tweets that match the above-mentioned criteria to a specified endpoint the moment such a tweet gets sent on Twitter. The alternative to the Streaming API is to access Twitter's archive, access to which is severely limited on the free tier of the Twitter API. Using the free tier, it is only possible to collect data from the last seven days, and even then the data set is not complete. Because of this, the Streaming API was used in this study.
 %TODO: Grafik zur Erläuterung. Kann ja vermutlich ein einfaches Flussdiagramm sein: Python App (bekommt Tweets von) Streaming API (läuft auf) Docker-Container (schubst Daten nach) BigQuery
 
-Using the streaming API mainly had two downsides. First, the Python app that collected the tweets had to reliably run 24/7 over a prolonged period of time. The Streaming API streams the data as it comes in and doesn't save it on Twitter's network, which means that every tweet the Python app does not 'catch' immediately will be lost. Second, the data produced by the streaming API could only be analyzed after the collection ran for several days. This trade-off, and possible ways to circumvent it, will be further discussed later in this work.
+Using the streaming API had two downsides. First, the Python app that collected the tweets had to reliably run 24/7 over a prolonged time. The Streaming API streams the data as it comes in and doesn't save it on Twitter's network, which means that every tweet the Python app does not 'catch' immediately will be lost. Second, the data produced by the streaming API could only be analyzed after the collection ran for several days. This trade-off, and possible ways to circumvent it, will be further discussed later in this work.
 
 To ensure constant availability, the python application that connects to the Streaming API and processes the incoming tweets runs on Google's App Engine (\cite{googleAppEngineApplication2020}). App Engine is Google's high-reliability service for serverless cloud apps. Programmers can use App Engine to constantly run their apps on Google's servers, instead of hosting their servers.
 
@@ -44,7 +44,7 @@ Inside of App Engine, the Python app ran in a Docker Container (\cite{merkel2014
     A [Docker] container is nothing but a running process, with some added encapsulation features applied to it in order to keep it isolated from the host and from other containers. One of the most important aspects of container isolation is that each container interacts with its own private filesystem; this filesystem is provided by a Docker image. \emph{An image includes everything needed to run an application} - the code or binary, runtimes, dependencies, and any other filesystem objects required. (\cite{dockerOrientationSetup2020}, emphasis by the author.)
 \end{quote}
 
-This combination of a provided, highly reliable server and a fully independent container running the app made it easy to set up a server-less infrastructure with high availability.
+This combination of a highly reliable service and a fully independent container running the app made it easy to set up a server-less infrastructure with high availability.
 
 \subsubsection{Processing the data during the collection}
 Every time the Streaming API sent a tweet to the app collecting the data, a sentiment score for the tweet text was calculated. For this, the Natural Language Toolkit (NLTK) was used (\cite{loper2002nltk}). NLTK uses a dictionary-based approach for sentiment analysis. This means that NLTK uses a corpus that is coded with different sentiment scores (\cite{haselmayer2017sentiment}). These scores are then summed up to calculate the overall sentiment of the tweet.
@@ -58,13 +58,13 @@ Tweets collected via the Streaming API are bundled to batches of 100. These batc
 
 Pub/Sub could be configured so that already acknowledged messages stay in the system and can be fetched again. This meant that even though the table schema was constantly reset in the first couple of days of data collection, the data was not lost and could simply be re-fetched again.
 
-The tweets are stored in a \emph{Google BigQuery} database, a server-less data warehouse that allows fast analysis of large amounts of data (\cite{googleBigQueryCloudData2020}). Using a server-less data warehouse guaranteed high reliability and easy access to the data base. \emph{Google Firebase} was also considered as data storage (\cite{googleCloudFirestoreFirebase2020}). As Firebase is a NoSQL database, the database queries would have been easier to write: Instead of using SQL, standard JavaScript could have been used. This would have resulted in easier queries, as JavaScript features, like method chaining, would have been available.
+The tweets are stored in a \emph{Google BigQuery} database, a serverless data warehouse that allows fast analysis of large amounts of data (\cite{googleBigQueryCloudData2020}). Using such a serverless data warehouse guaranteed high reliability and easy access to the database. \emph{Google Firebase} was also considered as data storage (\cite{googleCloudFirestoreFirebase2020}). As Firebase is a NoSQL database, the database queries would have been easier to write: Instead of using SQL, standard JavaScript could have been used. This would have resulted in easier queries, as JavaScript features, like method chaining, would have been available.
 
-Seeing that the SQL-based BigQuery is better equipped to handle large amounts of data, this solution was chosen in the end. This turned out to be a good choice considering that the final data set was almost 1GB big and that during an average testing session the data set was queried around 5 times. Using BigQuery meant that the queries needed to be written in SQL, a language with complicated semantics (\cite{slutz1998massive}).
+Seeing that the SQL-based BigQuery is better equipped to handle large amounts of data, this solution was chosen in the end. This turned out to be a good choice considering that the final data set was almost 1GB big and that during an average testing session the data set was queried around 5 times. Using BigQuery meant that the queries needed to be written in SQL, a language infamous for its complicated semantics (\cite{slutz1998massive}).
 
 BigQuery was chosen over other SQL databases, like SQLite or Postgres, because it is also a Google service like AppEngine. This meant that authentication between the script collecting the tweets and the database did not have to be implemented. BigQuery can also be directly connected to a Pub/Sub-Topic using Google DataFlow. Because the data was additionally processed, saving it was handled in a dedicated script. 
 
-\subsection{Visualizing the data}
+\subsection{Building the web-app to present the interactive visualizations}
 To visualize the data from the Streaming API, both Python libraries like ggplot (\cite{wickhamGgplot2ElegantGraphics2016}) and JavaScript libraries like D3 (\cite{bostockD3JsDataDriven}) and VegaLite (\cite{uwidlVegaLiteHighLevelGrammar}) were evaluated. To make the prototype as accessible as possible, a JavaScript-based library was chosen, as JavaScript is a popular web technology. A web page is easier to access to laymen than a Python-based app, as there is no need to install additional tooling. And even though Python scripts, including visualizations, can be embedded easily on the web now, choosing a web technology was the right approach.
 
 Ultimately, D3 was chosen as a visualization framework. VegaLite is an opinionated framework which chooses many defaults for the user, while D3 is unopinionated. This means that the visualizations are harder to code but more versatile.
@@ -75,11 +75,12 @@ Early prototypes of the tool used a Svelte-based web page to show the visualizat
 While D3 can work with raw data input and perform, e.g., filtering operations on these inputs, data operations were performed directly in the database using SQL queries. This decision was made because the final data set was almost 1GB big. Relying on D3 for filtering and aggregating the data would have meant that every time a user opens the tool, they would have to wait for the whole data set to finish downloading before they could use the tool itself. Using SQL queries instead meant that a lot fewer data had to be sent to the tool. Instead of downloading the full 997MB of the data set, the query results were only about 10KB big which greatly improved performance.
 
 %To explore the data set of collected tweets, users can have three additional filters that they can use
-Users could explore the data using different filters:
+Users could explore the data using different filters. This corresponds to the second part of Shneiderman's Visual Information Seeking Mantra \say{zoom and filter} (\cite[337]{shneidermanEyesHaveIt1996}). Users could use three different filters:
+
 \begin{enumerate}
     \item A word-filter that allows users to search the database for tweets including a specific word
     \item A toggle whether to include retweets in the data set
-    \item A toggle whether to include neutral tweets in the data set, with \emph{neutral} meaning tweets with a sentiment between -0.3 and +0.3 on a scale from -1 to 1 %TODO: write in related work about this
+    \item A toggle whether to include neutral tweets in the data set, \emph{neutral} meaning tweets with a sentiment between -0.3 and +0.3 on a scale from -1 to 1 %TODO: write in related work about this
 \end{enumerate}
 
 The toggles to include retweets and neutral tweets in the data set changed the visualizations immediately, whereas the word-filter initiated a new database query. The idea behind this was that users are likely to look for a specific topic and then want to explore how this topic is presented in the data set.
@@ -88,7 +89,7 @@ One possible scenario is that users want to research the public's general opinio
 
 Because of this, data fetching was rewritten before the user tests started. Every time a user filters for a new word, the tool fetches the data for the four different filter permutations: the full data set, the data set without retweets, the data set without neutral tweets, and the data set without retweets and neutral tweets. If the user then toggles additional filters, the corresponding pre-fetched data set gets immediately visualized instead of fetching a new data set from the database.
 
-\subsubsection{Visualizing the data}
+\subsubsection{Visualizing the tweet volume over time}
 The final prototype that was tested included two different visualizations:
 
 \begin{enumerate}
@@ -104,9 +105,9 @@ Time series---meaning the development of certain aspects over time---were chosen
     \label{fig:volume_areachart}
 \end{figure}
 
-To visualize the tweet volume over time, both an area chart and a bar chart were considered. Line charts and area charts are both common visualizations to show how something changed over time. Stock prices, for example, are usually shown as a line chart. An area chart is a line chart with its areas filled, which can be seen in figure \ref{fig:volume_areachart}. The filled area was used to indicate how many tweets contained the search word. However, visualizations that use line- or area charts to show development over time usually show data over a wider time range. For example, stock prices are usually shown over several years. The data set for this study spanned only around two months.
+To visualize the tweet volume over time, both an area chart and a bar chart were considered. Line charts and area charts are both common visualizations to show how something changed over time. Stock prices, for example, are usually shown as a line chart. An area chart is a line chart with its areas filled, which can be seen in figure \ref{fig:volume_areachart}. The filled area was used to indicate how many tweets contained the search word. However, visualizations that use line- or area charts to show development over time usually show data over a wider time range. For example, stock prices are usually shown over several years. 
 
-Because of this, the chart was changed to a bar chart, as seen in figure \ref{fig:volume_barchart}. Bar charts cannot show information as concise as line charts or area charts, but they make it easier to find and compare specific days. Especially for data sets that span a couple of months, instead of several years, this could be interesting.
+The data set for this study spanned only around two months. Because of this, the chart was changed to a bar chart, as seen in figure \ref{fig:volume_barchart}. Bar charts cannot show information as concise as line charts or area charts, but they make it easier to find and compare specific days. This could be especially interesting for data sets that span a couple of months, instead of several years.
 
 \begin{figure}[htb!]
     \fbox{\includegraphics[width=\linewidth]{images/final_prototype_volume.png}}
@@ -118,42 +119,7 @@ Using Chrome's responsive design inspector, the bar chart was pre-tested across 
 
 The final visualization also contained labeled axes. The x-axis showed dates, with ticks every 7 days. The y-axis, labeled \say{↑ Anzahl der Tweets pro Tag} (\emph{↑ Number of tweets per day}) showed numbers between 0 and 90,000 on a linear scale, with ticks every 10,000 tweets. The domain of the y-axis remained the same, even when the data set was filtered and therefore shrank. The domain was programmed to lie between 0 and the highest value in the biggest data set so that the biggest data set still fit into the visualization.
 
-The graph which shows the development of the sentiment over time is a line chart (see Figure \ref{fig:sentiment_linechart}). This visualization was chosen because the sentiment can also show negative values, as its domain ranges from -1 to +1. 
-% TODO Does this make sense? Why didn't I choose a bar chart? The line chart felt like the more natural choice here, but y tho?
-
-\begin{figure}[htb!]
-    \fbox{\includegraphics[width=\linewidth]{images/final_prototype_sentiment.png}}
-    \caption{The final prototype version of the sentiment chart showing the average sentiment per day. The blue line shows the average sentiment of tweets containing the word \emph{App}, the red line shows the sentiment of tweets not containing this word.}
-    \label{fig:sentiment_linechart}
-\end{figure}
-
-In this visualization, users can toggle between two view modes. The default mode shows the daily average sentiment of the tweets containing the search word as a blue line and the daily average sentiment of tweets \emph{not} containing the word as a red line. Users can also toggle to only see the average sentiment without any word-filters applied. This lets them, e.g., see the influence of neutral tweets or retweets on the whole data set.
-
-The two visualizations share the same three aforementioned filters. Consequently, both visualizations share the same data set which could make it easier for participants to mentally connect them. At the same time, placing the filter possibilities at the top of the Observable notebook means that the visualizations are affected by filters that are not in their immediate neighborhood. As this trade-off was tested in the user study, it will be further discussed later in this work.
-
-Explanatory texts for the visualizations were written and placed below the visualizations. This was done so that users are first confronted with the visualization and have the chance to find out what is displayed on themselves. Should they need further assistance, they could read the text below the visualization. Presenting the visualizations and the explanations in this order allows participants to try and form an understanding of the charts before and then test their assumptions against the explanation below.
-
-The explanatory texts contained information about what kind of data was displayed, and what the different parts of the chart meant. They included the explanation of which color coded which information in the visualizations.
-% TODO: the notebook also had explanatory texts. should they be included in the method section?
-
-\subsubsection{Ideas that were cut for time}\label{sec:cutForTime}
-The big data pipeline and the visualization dashboard were both built using the principles of \emph{Shape Up}, a relatively new management approach for software development projects (\cite{singerShapeStopRunning2019}). The core principle of Shape Up is to have a fixed time frame with a variable scope. Instead of creating a set of user stories, which then get estimated on how long they probably take, Shape Up's philosophy is to set clear boundaries, take a fixed amount of time (usually six weeks), and make the best use of this time. This methodology seemed like a more reasonable approach to writing a prototype for a master's thesis as the time frame is very strict.
-
-\begin{wrapfigure}{l}{0.3\textwidth}
-    \includegraphics[width=0.28\textwidth]{images/twitter_trends.jpg}
-    \caption{The trending topics on twitter. Collected on September 9th, 2020, 8.28 am}
-    \label{fig:twitter_trends}
-\end{wrapfigure}
-
-Because of this, however, some ideas that were planned for the visualization dashboard were ultimately cut for time.
-
-One feature that was not sufficiently finished when the user tests started was a \emph{trend analysis} based on the collected tweets. The plan was to show users the trending topics for each day in the visualization. Due to Twitter's limitations in their API, it was not possible to retrieve the daily trends that Twitter already collects and shows.
-
-To overcome this limitation, collocations were calculated for the tweet texts of each day. Collocations are \say{a lexical phenomenon} that \say{cover word pairs and phrases that are commonly used in language} (\cite[2]{mckeown2000collocations}), which means that they are word pairs that encounter together more often than by pure chance. The idea was that by calculating collocations using the tweets of a day, those word pairs could be phrases that were talked about on this day. While for some days the results seemed promising, for most of the days the calculated word pairs did not give much information. Tweaks on the algorithm calculating the collocations could have yielded more informative results, but these tweaks could not be implemented before the user tests started.
-
-Another feature that was planned, but not included, were tooltips in both visualizations. The tooltips were planned to include details, like the date and the specific value of the sentiment when hovering over a point on the line chart. While tooltips are generally possible in D3 for different chart types, there was no time left to properly implement them.
-
-For the bar chart, a workaround was used: Title-attributes were added to the div-containers that create the bars using the code seen in figure \ref{code:details_title}. By hovering over the bars, this title attribute, which contained the date, the total number of tweets, the number of tweets containing the search word, and the percentage of tweets containing the search word, was shown. As the line chart is not built using divs per day, but rather from a single SVG element, this workaround could not be used in the chart showing the development of the sentiment over time.
+The bar chart showing the tweet volume over time also contained tooltips, satisfying \citeauthor{shneidermanEyesHaveIt1996}'s requirement for \emph{details-on-demand} (\cite{shneidermanEyesHaveIt1996}). These tooltips were realized by adding title-attributes to the div-containers that create the bars. The code for this can be seen in Figure \ref{code:details_title}. By hovering over the bars, this title attribute was shown---this is the default behavior for every modern browser. The title attribute contained the date of the currently hovered bar, the total number of tweets on this day, the number of tweets containing the search word on this day, and the percentage of tweets containing the search word on this day. As the line chart is not built using a single div per day, but rather from one SVG-line, this solution could not be used in the chart showing the development of the sentiment over time. This limitation will be further discussed in Section \ref{fw_tooltips}.
 
 \begin{figure}[h!]
     \begin{verbatim}
@@ -169,16 +135,27 @@ For the bar chart, a workaround was used: Title-attributes were added to the div
     \label{code:details_title}
 \end{figure}
 
-As shown in chapter \ref{sec:fetchedData}, the country of origin for every tweet was collected. With this, a visualization could have shown differences in tweeting behavior between different countries. A theoretical example would be the question if tweets about a Covid-19 vaccine that come from Russia are more positive than tweets about a vaccine that were tweeted from other countries. As only around 20,000 out of the 2.5 million tweets that were collected contained the origin country, this feature was not implemented.
+\subsubsection{Visualizing the average daily sentiment over time}
+The visualization which shows the development of the average daily sentiment is a line chart (see Figure \ref{fig:sentiment_linechart}). Its domain ranges from -1 to +1.
 
-During tweet collection, some data attributes about the user who sent the tweet were collected, like their user name, their self-description, and their friend count. These attributes would have allowed performing some analysis on who sent which kinds of tweets – e.g., whether accounts with a lot of followers tend to send more positive or more negative tweets. These attributes were ultimately unused.
+\begin{figure}[htb!]
+    \fbox{\includegraphics[width=\linewidth]{images/final_prototype_sentiment.png}}
+    \caption{The final prototype version of the sentiment chart showing the average sentiment per day. The blue line shows the average sentiment of tweets containing the word \emph{App}, the red line shows the sentiment of tweets not containing this word.}
+    \label{fig:sentiment_linechart}
+\end{figure}
 
-Another data point that was collected, but not used, was the verification status of the tweets' authors. The initial plan was to offer users an option to compare tweets from verified and unverified sources. The plan was to include a toggle that breaks up the existing bar chart and line chart with another dimension \emph{is\_verified}. This would have added a lot of complexity to the visualizations for the users. Because the focus of this work is on visualizations that can be easily read and understood by laymen, this feature was eventually scrapped before the user tests.
+In this visualization, users can toggle between two view modes. The default mode shows the daily average sentiment of the tweets containing the search word as a blue line and the daily average sentiment of tweets \emph{not} containing the word as a red line. Users can also toggle to only see the average sentiment without any word-filters applied. This lets them, e.g., see the influence of neutral tweets or retweets on the whole data set.
+
+The two visualizations share the same three aforementioned filters. Consequently, both visualizations share the same data set which could make it easier for participants to mentally connect them. At the same time, placing the filter possibilities at the top of the Observable notebook means that the visualizations are affected by filters that are not in their immediate neighborhood. As this trade-off was tested in the user study, it will be further discussed later in this work.
+
+Explanatory texts for the visualizations were written and placed below the visualizations. This was done so that users are first confronted with the visualization and have the chance to find out what is displayed on themselves. Should they need further assistance, they could read the text below the visualization. Presenting the visualizations and the explanations in this order allows participants to try and form an understanding of the charts before and then test their assumptions against the explanation below.
+
+The explanatory texts contained information about what kind of data was displayed, and what the different parts of the chart meant. They also included the explanation of which color coded which information in the visualizations.
 
 \subsection{Testing the dashboard}
-The user tests of the dashboard were testing two things: how users explore the data set using the dashboard, and how easily they can read the two visualizations. To test this, a guide for a semi-structured interview was prepared (\cite[315ff.]{schnell1999methoden}). This guide can be found in the appendix of this work. %TODO: Die Semi-Structured Quelle hierher packen!
+The user tests of the dashboard were testing two things: how users explore the data set using the dashboard, and how easily they can read the two visualizations. To test this, a guide for a semi-structured interview was prepared (\cite[315ff.]{schnell1999methoden}). This guide can be found in the appendix of this work.
 
-The user test consisted of two parts. After a brief introduction to the topic of this master thesis and a quick overview of the data set, participants got around five minutes to explore the dashboard however they wanted. During this time, they were already asked to think aloud.
+The user test consisted of two parts. After a brief introduction to the topic of this master thesis and a quick overview of the data set, participants got around five minutes to explore the dashboard in any way they wanted. During this time, they were already asked to think aloud.
 
 After this phase of free exploration, the participants were asked to solve four tasks in total, each with increasing difficulty. These tasks were designed to check the participants' ability to properly read the data visualizations. Again, participants were asked to think aloud while solving the tasks.
 
