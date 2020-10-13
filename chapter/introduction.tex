@@ -1,24 +1,23 @@
 \section{Introduction}
-"We also hope it might change your mind about what journalism could look like. We believe journalism doesn’t always have to be a one-way conversation in which we present words for you to read. We also want to give you the tools to hold institutions in your life accountable for their choices." (\cite{angwinMakingPrivacyPersonal2020}) -> use this as explanation/motivation
+Humans have always communicated (\cite{tomasello2010origins}). Over the centuries, this communication evolved and became more complicated. What began with hand gestures evolved into myriads of spoken and written languages.
 
-Structure
-\begin{itemize}
-    \item humans have always communicated
-    \item over the centuries, communication grew. From small, tight-knit communities, to larger communities, to one-sided mass-media communication, to globe-spanning social networks, allowing everyone with internet access to communicate with each other in real-time
-    \item This opened communication empowered people to look up information for themselves, rather than having to rely on a single expert in their community. However, the internet is riddled with information with bad quality. This can lead to skepticism towards scientifically proven concepts and spread misinformation (\cite{krimskyRiskCommunicationInternet2007}). %TODO: find more recent source?
-    \item The problem is: these kinds of contents often drive engagement. As the big players---Google, Facebook, Twitter---make money off of this engagement, it is in their interest that users see as many engagement-driving contents as possible. For this, they use recommendation algorithms.
-    \item These algorithms lead to the so-called \emph{filter bubble-effect} which enforces the opinion a user already has (\cite{pariser2011filter}), can lead to social problems. Discussions can become less diverse and everyone thinks they are right.
-    \item Currently, there is no way to find out reliably what Twitter users think inside of Twitter. One way to battle this problem is Big Data (\cite{crawfordCriticalQuestionsBig2012}). Using this approach could give users a birds-eye view of the network instead of a tailored experience created by recommendation algorithms.
-    \item As its name suggests, Big Data relies on huge datasets to give meaningful results. Generating these datasets manually is a virtually impossible challenge.
-    \item However, Twitter allows the automated collection of tweets via their APIs. This means that collection can run fully-automated over a prolonged time. Manual analysis of the collected data is not an option as the dataset is too big.
-    \item Natural Language Processing can help to summarize these tweets in a way that makes manual coding of every tweet obsolete
-    \item A good way to make such big data sets accessible to laymen is data visualization (\cite{donalekImmersiveCollaborativeData2014}). This, in combination with NLP, can help users to understand the data set on a meta-level, and not on the level of the individual tweets.
-\end{itemize}
+At the same time, the target audience of communication grew. From small, tight-knit communities, to larger ones, to one-sided mass media communication which allows single actors to reach millions of people (\cite{luhmann1995realitat}). Over the last few years, yet another form of communication emerged. Social networks combine traditional, multi-sided communication with the range of mass media and change the way people communicate with each other: behavioral patterns that were formerly mostly seen in celebrities are now adopted in regular interpersonal communication on social media sites (\cite{stefanoneRelationshipTraditionalMass2010}).
 
-The goal of this thesis is two-fold: is it possible to automatically collect all German tweets to a specific topic and store them in a way that they can be analyzed? And can this data be processed and visualized in a way that allows laymen to gather information from this data?
+This opened communication empowered people to look up information for themselves, rather than having to rely on a single expert in their community. However, the internet is riddled with information with bad quality. These low-quality information can spread misinformation and lead to skepticism towards scientifically proven concepts (\cite{krimskyRiskCommunicationInternet2007}). One famous example for this is the wide-spread misinformation that vaccines cause autism---a myth that has been debunked multiple times, but gets still spread via the internet (\cite{baker2008mercury}).
 
-\begin{itemize}
-    \item For this, an app that automatically collects tweets about the ongoing corona epidemic was written.
-    \item Then, interactive visualizations for this data were programmed
-    \item Lastly, these visualizations were tested with laymen who had little to no experience working with big data sets.
-\end{itemize}
+The often outrageous nature of these kinds of content often drives engagement: one study showed that anti-vaccine contents got retweeted 4 times as often as neutral tweets about vaccinations (\cite{blankenshipSentimentContentsRetweets2018}). As the big players on the Internet---Google, Facebook, and Twitter---make money off of this engagement, it is in their interest that users see as many engagement-driving contents as possible. This leads to recommendation algorithms which show these contents again and again to people susceptible to this kind of (mis-)information.
+
+This leads to the so-called \emph{filter bubble-effect}. The opinion a user already has gets enforced (\cite{pariser2011filter}), while opposing facts or opinions are less visible. This can lead to social problems: Discussions become less diverse and people think they are part of the majority, even if they are part of a loud minority (\cite{moscoviciSilentMajoritiesLoud1991}).
+
+As of now, Social Networks do not offer a transparent look into their recommender algorithms. This means that users cannot be sure whether their opinion is actually shared by a majority. One way to fight this problem is Big Data (\cite{crawfordCriticalQuestionsBig2012}).
+
+As its name suggests, Big Data relies on huge datasets to give meaningful results and insights. Generating these data sets manually is a challenge that is virtually impossible. However, Twitter allows the automated collection of tweets via their APIs. This means that data collection can run fully automated over a prolonged time. Leveraging such a data set could give user's a bird's-eye view on the social network so that they could see for themselves how certain discussions are unfolding. For this, data visualizations play a big role, as they can help making huge data sets accessible to laymen (\cite{donalekImmersiveCollaborativeData2014}).
+
+This thesis aims to answer two questions:
+
+\begin{enumerate}
+    \item Is it possible to automatically collect all German-language tweets about a specific topic, and store these tweets in a way that they can be analyzed?
+    \item Can this data be processed and visualizied so that laymen can gain insight from this data?
+\end{enumerate}
+
+For this, an app that automatically tweets about the currently ongoing corona epidemic was written. Then, interactive data visualizations for this data were coded. Lastly, these visualizations were tested with laymen who had little to no experience working with big data sets.
