@@ -169,4 +169,13 @@ citecolor = black] {hyperref}
 \newpage
 \printbibliography[heading=bibintoc,title={References}]
 
+\clearpage
+\includepdf[pages=1,scale=.8,pagecommand={\section{Appendix A: Script for the user study}\label{pdf:script_study}},linktodoc=true]{chapter/appendix/script_study.pdf}
+\includepdf[pages=2-,scale=.8,pagecommand={},linktodoc=true]{chapter/appendix/script_study.pdf}
+
+\clearpage
+\includepdf[pages=1,scale=.8,pagecommand={\section{Appendix B: Transcripts}\label{pdf:transcripts}},linktodoc=true]{chapter/appendix/full_transcripts.pdf}
+%\includepdf[pages=2-,scale=.8,pagecommand={},linktodoc=true]{chapter/appendix/full_transcripts.pdf}
+
+
 \end{document}

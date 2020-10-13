@@ -71,7 +71,7 @@ Allowing users to explore a bigger data set could mean that the way the data set
 The chart showing the new infections and corona-related casualties in Brasil can be manipulated by users in different ways:
 \begin{itemize}
     \item Buttons on top of the chart let users switch the scope of the data set between 1 month, 3 months, and the whole data set.
-    \item The scroll bar allows users to move their selected time frame. This means they can see data from the last three months starting today, from the last three months starting next week, or wherever users move the scroll bar.
+    \item The scroll bar allows users to move the selected time frame. This means they can see data from the last three months starting today, from the last three months starting next week, or wherever users move the scroll bar.
     \item The scroll bar can also be resized. By doing this, users can choose a time frame other than the default three options.
 \end{itemize}
 
@@ -137,6 +137,9 @@ To keep the visualizations easily readable, the paradigm \emph{one job per visua
 
 The separation of the visualizations could be deepened even further by showing the different visualizations in different tabs. During the user tests, the participants rarely referred to the other visualization during interpretation.
 
+\subsubsection*{Interesting results}
+Participants said that the results are interesting and surprising, which according to \citeauthor{northMeasuringVisualizationInsight2006} is an indicator that they could gain insight. Future versions of the prototype could allow participants the easy exporting of specific results to share them with interested friends if they find results surprising or interesting. Participants also reported that the tool made them reflect their own beliefs of how social media works and how discussions unfold.
+
 \subsubsection*{Supporting explanatory texts}
 The explanatory texts helped the participants understanding the visualizations and the capabilities of the tool better. As already discussed in chapter \ref{sec:missingExamples}, these explanatory texts can be further improved, e.g., by adding examples and hints for analysis.
 
@@ -159,3 +162,6 @@ Dividing texts into these two categories could result in a less cluttered interf
 Except for the word filter, which had to fetch new data from the database, the filters could be applied quickly. This seemed to support how participants worked with the tool while solving the tasks during the interview as well as during the free exploration. This suggests that future development of the tool should focus on keeping the quick filters for toggling retweets and neutral tweets should keep this interaction quick instead of fetching new data every time one of these filters is toggled.
 
 During user tests, the toggles were mostly used for a before-and-after view of the dataset, e.g., quickly toggling the retweets to visually compare the impact the retweets had on the tweet volume. This interaction could be further improved. One example could be to introduce a button that can be held down to turn all filters on or off. Holding down the button could show the 'original' data set without the retweet- or neutral tweet filters applied, letting go of the button shows the filters the users applied before again. A similar interaction can be found in image manipulation software like Apple Photos, where holding a button switches between the original photo and the manipulated version.
+
+\subsubsection*{Tooltip with further information}
+The tooltip that was shown in the volume chart helped participants finding answers to their questions. Future development could focus on making this tooltip more helpful. One important step for this would be to create a more visually appealing tooltip which contains styled information. The tooltip that was eventually used in this study could only handled single strings of unstyled text. However, text styling is one of the most efficient ways to structure information so that it can be easily digested. 
