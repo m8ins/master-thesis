@@ -13,7 +13,7 @@ This section will go into further detail about which data was collected from Twi
 \subsubsection{Fetching the data from Twitter} \label{sec:fetchedData}
 The application for collecting the tweets was written in Python 3 (\cite{10.5555/1593511}), the Twitter API was accessed using the package \emph{Tweepy} (\cite{roesslein2020tweepy}). Tweepy's connection to Twitter's Streaming API was used to collect all German-language tweets containing one or more of the keywords \verb+Corona, Covid-19, Covidioten, Distancing+.
 
-From the returned Tweet Objects\footnote{The documentation on what data a Tweet Object contains can be found here: https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/tweet-object (last visited on Oct. 13, 2020)} only a few data points were kept that seemed interesting before the data collection started. This has mainly ethical reasons (\cite{richards2014big}). The author of this study did not want to collect excessive personal data without having a good reason, even though this has become the norm for big data over the last decade. The following data points of a Tweet Object are processed further and eventually saved to a database:
+From the returned Tweet Objects\footnote{The documentation on what data a Tweet Object contains can be found here: https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/tweet-object (last visited on Oct. 13, 2020)} only a few data points were kept that seemed interesting before the data collection started. This has mainly ethical reasons (\cite{richards2014big}). The author of this study did not want to collect excessive personal data without good reason, even though this has become the norm for big data over the last decade. The following data points of a Tweet Object are processed further and eventually saved to a database:
 
 \begin{itemize}
 \item \textbf{The full text of the tweet.} This is mainly used for sentiment analysis and other natural language processing tasks.
@@ -26,7 +26,7 @@ From the returned Tweet Objects\footnote{The documentation on what data a Tweet 
 \item \textbf{The country from which the tweet was sent.} Twitter also offers coordinate-based geolocations, but choosing the country instead seemed to honor the user's privacy more.
 \item \textbf{Whether the account is verified or not.} Accounts can be verified by Twitter, which means that they are run by the person who the account claims to be. Verified accounts are often influencers and have a lot of followers.
 \item \textbf{The source of the tweet.} This shows if the tweet came from the web app, a desktop app, a mobile app, a 3rd party-application, or other sources.
-\item \textbf{The calculated sentiment of the tweet.} The score is calculated during the pre-processing of the tweet. Later sections will go into more detail on how the sentiment is calculated.
+\item \textbf{The calculated sentiment of the tweet.} The sentiment score, which represents how positive or negative a tweet is, is calculated during the pre-processing step. Later sections will go into more detail on how the sentiment is calculated.
 \end{itemize}
 
 %TODO: Add figure how the data was collected (it's in miro)
