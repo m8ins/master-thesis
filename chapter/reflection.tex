@@ -2,7 +2,15 @@
 This section will discuss the methods used for this master thesis. While the results are generally convincing, there is still room for improvement in further studies.
 
 \subsection*{Using SQL databases instead of NoSQL}
-As discussed in chapter \ref{sec:storage}, one of the earliest decisions while working on this thesis was whether to use a NoSQL database, like Firebase, or an SQL database. The decision was mainly
+As discussed in chapter \ref{sec:storage}, one of the earliest decisions while working on this thesis was whether to use a NoSQL database, like Firebase, or an SQL database. Both of these solutions have their advantages and drawbacks. NoSQL databases are generally easier to query, as their query syntax often uses method chaining for filtering and querying. This means that the syntax can closely follow how the query would be described verbally. One could, e.g., want to see all tweets by verified accounts, but only those that have a sentiment between +0.3 and +1. Using method chaining, the query could be something like the following:
+
+\begin{verbatim}
+    data.filter('is_verified', '==', 'true').filter('sentiment', '>=', '+0.3')
+\end{verbatim}
+
+The drawback is that NoSQL databases can become slow when they need to aggregate over large amounts of data. This is one of the core strengths of SQL databases, as they remain performant even with big data sets. SQL also uses a fixed table scheme, which helps to keep the data in a strict form as is needed for the interactive visualizations. However, as they work with the principle of relational algebra, SQL queries are harder to write.
+
+Seeing that the final dataset collected throughout the study was more than 1GB big, SQL seemed to be the right choice, even if the queries were more complicated to write.
 
 \subsection*{Using qualitative content analysis could only answer parts of the research question}
 One of the biggest issues for the author of this study is that the focus of the study and the focus of this written-out thesis do not fully overlap. The study began as a feasibility analysis that aimed to find out if it is possible to collect large amounts of tweets and show them in such a way that laymen can interpret the data. In this initial state, the study consisted of two parts:
