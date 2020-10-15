@@ -17,7 +17,7 @@ One of the biggest issues for the author of this study is that the focus of the 
 
 \begin{enumerate}
     \item The automated collection and storage of every German tweet to a specific topic---in this case, tweets related to the Coronavirus,
-    \item and an easily accessible visualization of these tweets which can give insight to people who are laymen when it comes to analyzing big data
+    \item and an easily accessible visualization of these tweets which can give insight to laymen when it comes to analyzing big data.
 \end{enumerate}
 
 One of the study's goals was to test several approaches on how to implement these two parts. To evaluate the outcome of this study from a communications science-perspective, an additional interview study based on Mayring's approach to qualitative content analysis was conducted. The results reported in this thesis are mostly based on the findings of this interview study.
@@ -25,13 +25,13 @@ One of the study's goals was to test several approaches on how to implement thes
 However, this study did not further examine the quality and feasibility of the code that was written. While the study showed that it is possible to automatically collect and store tweets with certain filter criteria, it did not give additional insight in \emph{how} to do it. Nevertheless, the insights that were generated from the interview study were valuable.
 
 \subsection*{Using the Streaming API made it impossible to take Likes into account}
-One of the possible problems of collecting the data the way they were collected is that Likes could not be taken into account for the analysis of the tweets. Studies have shown that Likes are strongly linked to actual engagement and support, e.g., during congressional elections (\cite{macwilliamsForecastingCongressionalElections2015}). This hints at the importance of Likes to measure the general public's approval of specific tweets. In the current implementation, the volume of the tweets strongly affects the sentiment analysis: if many negative tweets are sent on a specific day, the overall sentiment on that day will go down. This holds true the other way around as well. Many positive tweets affect the curve so that the daily average goes up.
+One of the possible problems of collecting the data the way they were collected is that Likes could not be taken into account for the analysis of the tweets. Studies have shown that Likes are strongly linked to actual engagement and support, e.g., during congressional elections (\cite{macwilliamsForecastingCongressionalElections2015}). This hints at the importance of Likes to measure the general public's approval of specific tweets. In the current implementation, the volume of the tweets strongly affects the sentiment analysis: If many negative tweets are sent on a specific day, the overall sentiment on that day will go down. This holds true the other way around as well. Many positive tweets affect the curve so that the daily average goes up.
 
 This means that, in theory, a bot army could flood specific topics with very negative tweets. Even if not a single person saw these tweets, or interacted with them, these tweets would affect the reported overall sentiment. If the Likes of a tweet could be collected as well, users could, e.g., filter for tweets with at least 5 likes. This would filter out the tweets which did not drive engagement on Twitter.
 
 On the other hand, this approach would bring additional problems:
 \begin{itemize}
-    \item Tweets from smaller accounts would be filtered out, even though these accounts are not necessarily part of a bot network.
+    \item tweets from smaller accounts would be filtered out, even though these accounts are not necessarily part of a bot network.
     \item Filtering out tweets that have less than an arbitrary number of Likes distorts the data set in some way. While they might paint a more accurate picture of what society thinks by filtering out automated, nearly invisible tweets, this could also silence the influence of people without celebrity or influencer status. Seeing that Twitter is a grassroots medium that allows people to make their voices heard regardless of their social status (\cite{passmann2019alte}), a carelessly implemented filter option could silence those voices.
     \item Collecting a tweet's Likes requires either the usage of the archive API or a script that fetches the Likes of a tweet a specific time after it was collected, e.g., three days after initial collection. This is necessary because the streaming API sends a tweet to the collecting script almost immediately after it was sent. This means that every time the streaming API sends a tweet, its number of Likes is likely 0.
 \end{itemize}
@@ -44,7 +44,7 @@ The prototype created in this study does not follow the web content accessibilit
 There are two ways to improve this situation:
 
 \begin{enumerate}
-    \item The visualization showing the tweet volume over time could incorporate texture in addition to color to differentiate between the two groups 'Tweets containing the search word' and 'All tweets'. Seeing that both color and patterns are qualitative nominal variables, they can be used interchangeably to encode the same information (\cite{bornerDataVisualizationLiteracy2019}). %TODO in Figma prototypen wie das aussehen kann?
+    \item The visualization showing the tweet volume over time could incorporate texture in addition to color to differentiate between the two groups 'tweets containing the search word' and 'All tweets'. Seeing that both color and patterns are qualitative nominal variables, they can be used interchangeably to encode the same information (\cite{bornerDataVisualizationLiteracy2019}). %TODO in Figma prototypen wie das aussehen kann?
     \item The visualization showing the daily average sentiment cannot use a pattern to additionally encode the colors because the line is too narrow to show a pattern. In this case, colors with sufficient differences in contrast and luminance should be chosen. In addition to this, the afore-mentioned visual color legend should be incorporated, as the textual explanation could not sufficiently explain the colors as they are perceived by a colorblind person.
 \end{enumerate}
 

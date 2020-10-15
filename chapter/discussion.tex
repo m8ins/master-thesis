@@ -15,7 +15,7 @@ The separation of the visualizations could be deepened even further by showing t
 Participants said that the results are interesting and surprising, which according to \citeauthor{northMeasuringVisualizationInsight2006} is an indicator that they could gain insight. Future versions of the prototype could allow participants the easy exporting of specific results to share them with interested friends if they find results surprising or interesting. Participants also reported that the tool made them reflect their own beliefs of how social media works and how discussions unfold.
 
 \subsubsection*{Supporting explanatory texts}
-The explanatory texts helped the participants understanding the visualizations and the capabilities of the tool better. As already discussed in chapter \ref{sec:missingExamples}, these explanatory texts can be further improved, e.g., by adding examples and hints for analysis.
+The explanatory texts helped the participants understand the visualizations and the capabilities of the tool better. As discussed in chapter \ref{sec:missingExamples}, these explanatory texts can be further improved, e.g., by adding examples and hints for analysis.
 
 One thing that could be changed about the explanatory texts is their position. Due to the nature of Observable, which was used to build the prototype, explanatory texts were always visible and did not only show in context. One way to further improve the way the texts are presented is by visually hiding some of the texts in the interface. For this, texts should be divided into two kinds:
 \begin{enumerate}
@@ -23,7 +23,7 @@ One thing that could be changed about the explanatory texts is their position. D
     \item Texts that offer additional help, insights, explanations, or inspiration for analyzing the data set
 \end{enumerate}
 
-Dividing texts into these two categories could result in a less cluttered interface. Important texts from the first category can be always shown, while texts that fall into the second category can be hidden, e.g., in tooltips or detail panes. Showing only necessary texts also means that the visualizations are front-and-center in the tool, attracting the users' attention. It would also eliminate the need to scroll a lot when accessing the tool from a laptop or tablet (cf. m26, l. 75). One example how these hints could be shown can be seen in figure \ref{fig:sentiment_tooltip_hint}.
+Dividing texts into these two categories could result in a less cluttered interface. Important texts from the first category can always be shown, while texts that fall into the second category can be hidden, e.g., in tooltips or detail panes. Showing only necessary texts also means that the visualizations are front-and-center in the tool, attracting the users' attention. It would also eliminate the need to scroll a lot when accessing the tool from a laptop or tablet (cf. m26, l. 75). One example of how these hints could be shown can be seen in figure \ref{fig:sentiment_tooltip_hint}.
 
 \begin{figure}[htb]
     \centering
@@ -33,7 +33,7 @@ Dividing texts into these two categories could result in a less cluttered interf
 \end{figure}
 
 \subsubsection*{Filters can be applied quickly}
-Except for the word filter, which had to fetch new data from the database, the filters could be applied quickly. This seemed to support how participants worked with the tool while solving the tasks during the interview as well as during the free exploration. This suggests that future development of the tool should focus on keeping the quick filters for toggling retweets and neutral tweets should keep this interaction quick instead of fetching new data every time one of these filters is toggled.
+Except for the word filter, which had to fetch new data from the database, the filters could be applied quickly. This seemed to support how participants worked with the tool while solving the tasks during the interview as well as during the free exploration. This suggests that future development should focus on keeping the interaction with these filters quick.
 
 During user tests, the toggles were mostly used for a before-and-after view of the dataset, e.g., quickly toggling the retweets to visually compare the impact the retweets had on the tweet volume. This interaction could be further improved. One example could be to introduce a button that can be held down to turn all filters on or off. Holding down the button could show the 'original' data set without the retweet- or neutral tweet filters applied, letting go of the button shows the filters the users applied before again. A similar interaction can be found in image manipulation software like Apple Photos, where holding a button switches between the original photo and the manipulated version.
 
@@ -48,25 +48,25 @@ Multiple participants had trouble recognizing what data filters were applied for
 
 \begin{figure}[htbp]
     \fbox{\includegraphics[width=\linewidth]{images/amazon_filters.jpg}}
-    \caption{The Amazon search is filtered to English-language books which are eligible to prime-shipping, with the search input \emph{don't make me think}. Highlight by the author}
+    \caption{The Amazon search is filtered to English-language books which are eligible for prime-shipping, with the search input \emph{don't make me think}. Highlight by the author.}
     \label{fig:amazon_filters}
 \end{figure}
 
 This means that the filter status should be visible directly next to the visualization. This way, participants would not need to search for the current filter status. Rather, the status would almost always be in view while interpreting the visualizations. There are two possible ways to show the filters near the visualizations:
 \begin{enumerate}
-    \item \textbf{Show a descriptive text above the visualization:} using a text to show the status of the filter could help participants to quickly understand what kind of data the visualization is showing at the moment. One example of this technique can be found on Amazon, as seen in \textbf{Figure \ref{fig:amazon_filters}}. This technique is especially useful when a lot of different filters can be applied.
-    \item \textbf{Show the filter toggles right next to the visualization:} instead of showing the filter status as a text, showing the filters with the actual toggles would allow users to change the filters right next to the visualization.
+    \item \textbf{Show a descriptive text above the visualization:} Using a text to show the status of the filter could help participants to quickly understand what kind of data the visualization is showing at the moment. One example of this technique can be found on Amazon, as seen in \textbf{Figure \ref{fig:amazon_filters}}. This technique is especially useful when a lot of different filters can be applied.
+    \item \textbf{Show the filter toggles right next to the visualization:} Instead of showing the filter status as a text, showing the filters with the actual toggles would allow users to change the filters right next to the visualization.
 \end{enumerate}
 
 \begin{figure}[h!tbp]
     \fbox{\includegraphics[width=\linewidth]{images/legend_and_filters.png}}
-    \caption{Proposed layout of the tweet volume with a legend and filters directly next to the graph}
+    \caption{Proposed layout of the tweet volume with a legend and filters directly next to the graph.}
     \label{fig:legend_and_filters}
 \end{figure}
 
-Showing the filter toggles right next to the visualizations seems like a straightforward idea. However, this raises the question if the filters of the two visualizations should be linked or not, i.e., should the filter of the sentiment graph change as well when the filter of the volume graph is changed or not. To decide this, further studies should be conducted to see if the synchronicity of the data visualizations is helpful or not.
+Showing the filter toggles right next to the visualizations seems like a straightforward idea. However, this raises the question if the filters of the two visualizations should be linked or not, i.e., should the filter of the sentiment graph change as well when the filter of the volume graph is changed or not? To decide this, further studies should be conducted to see if the synchronicity of the data visualizations is helpful or not.
 
-This study did not examine if it helps users to have a single filter context within several visualizations or not. During the exploration phase in the interview, however, the participants did not seem to switch a lot between examining the tweet volume and the sentiment chart. This could suggest that having a single filter applied to both visualizations is not a necessity. In this case, using two filter sets that are independent of each other could avoid user confusion as only explicit user actions influence the visualization.
+This study did not examine if it helps users to have a single filter context within several visualizations or not. During the exploration phase in the interview, however, the participants did not seem to switch a lot between examining the tweet volume and the sentiment chart. This could suggest that having a single filter applied to both visualizations is not a necessity. In this case, using two independent filter sets that are independent of each other could avoid user confusion as only explicit user actions influence the visualization.
 
 \subsubsection*{Color legend}
 Another missing interface component are colored legends. During user testing, several problems arose because of the missing legend. For one, the graphs were less self-contained. Users were forced to read the explanatory texts that accompanied the graphs to be able to understand what the different colors mean. Another problem with the textual explanation of colors was that different participants would have named the colors differently than the text did and were confused, e.g., when the text talked about a light-red line, but the participants only identified an orange one. A legend like the one shown in \textbf{Figure \ref{fig:legend_example}} could have helped to identify the colors more easily, as well as making the graph more self-explanatory.
@@ -76,30 +76,30 @@ Another missing interface component are colored legends. During user testing, se
 The added legend could also help solve the layout problem that participants mentioned. With the explanatory texts no longer necessary to understand the graphs, the texts serve as an additional explanation and, as such, can remain below the graph itself.
 
 \subsubsection*{Loading indicator}
-Another component that was missing from the interface was an indicator that new data was fetched from the server. One possibility to show this fetching would be to show a small loading indicator next to the word filter. However, this position could hide the loading indicator, making it not noticeable enough. It would also not indicate that the visualization does not yet reflect the selected data set.
+Another component that was missing from the interface was an indicator that new data was fetched from the server. One possibility to show this fetching would be to show a small loading indicator next to the word filter. However, this position may not be noticeable enough. It would also not indicate that the visualization does not yet reflect the selected data set.
 
 Another possibility would be to show in the visualizations themselves that new data is being fetched. As fetching takes about 5 seconds and the visualizations have not been updated before the fetching is complete, it should not be a big problem to visually hide the visualizations during the fetching stage. A possible solution for this can be seen in figure \ref{fig:fetching_state}.
 
 \begin{figure}[htb]
     \fbox{\includegraphics[width=\linewidth]{images/fetching_state.png}}
-    \caption{Proposed solution to show that new data is being retrieved from the server}
+    \caption{Proposed solution to show that new data is being retrieved from the server.}
     \label{fig:fetching_state}
 \end{figure}
 
 \subsection{Hindering factors: missing information}
-The contents of this section are about pieces of information that participants said they would expect to interpret the data more efficiently. This information can be textual or visual: Textual information means written text, some additional explanation of how to work with the tool, or more detailed information. Visual information means, for example, more emphasis on certain aspects of the charts, or highlighted information.
+The contents of this section are about pieces of information that participants said they would expect to be able to interpret the data more efficiently. This information can be textual or visual: Textual information means written text, some additional explanation of how to work with the tool, or more detailed information. Visual information means, e.g., more emphasis on certain aspects of the charts, or highlighted information.
 
 \subsubsection*{Missing real-world context}
 As discussed in section \ref{sec:cutForTime}, one idea that was not implemented due to time constraints was to give participants some context as to what happened on specific days based on the tweet-texts themselves. Because the calculated collocations did not yield satisfying results, this feature was not implemented for the prototype of the dashboard.
 
-Some participants explicitly said that they would have liked to know what happened on specific days, especially when they recognized spikes in Twitter activity for a topic or spikes in the sentiment on a specific day. Further development of the tool should take this into account and, e.g., collect daily Twitter trends using the Trend API\footnote{https://developer.twitter.com/en/docs/twitter-api/v1/trends/trends-for-location/api-reference/get-trends-place, last visited on Sep. 24, 2020 \\}. This would allow participants to analyze the dataset more thoroughly. In several interviews, participants said that they would have wanted more context to understand spikes in the tweet volume or the sentiment graph. They expected this information to be present in the prototype itself, and no participant searched on the internet for further information on what happened on these days.
+Some participants explicitly said that they would have liked to know what happened on specific days, especially when they recognized spikes in Twitter activity for a topic or spikes in the sentiment on a specific day. Further development of the tool should take this into account and, e.g., collect daily Twitter trends using the Trend API\footnote{https://developer.twitter.com/en/docs/twitter-api/v1/trends/trends-for-location/api-reference/get-trends-place, last visited on Sep. 24, 2020 \\}. This would allow participants to analyze the dataset more thoroughly. In several interviews, participants said that they would have wanted more context to understand spikes in the tweet volume or the sentiment graph. They expected this information to be present in the prototype itself, and no participant searched the internet for further information on what happened on these days.
 
 The Twitter trends could give at least some hints on what might have happened on these days. These trends, or trending topics, are names, phrases, or topics that are mentioned significantly more often than others. Those trending topics are fleeting, however. A study examining the trends on Twitter found that most of the trends stayed in the top 10 or even top 50 of the trending topics for less than an hour (\cite{annamoradnejadComprehensiveAnalysisTwitter2019}). This makes it necessary to aggregate the trends per day.
 
-Showing participants the trending topics for specific days could also solve another problem that became visible during the user tests. During the free exploration in the interviews, some participants immediately had ideas that they wanted to check in the dataset (see, for example, w26b, l. 9: \say{Ich probier es mal mit Stuttgart denn da gab es ja glaub ich eine der ersten dieser Hygiene-Demos}). Others only explored the data set that was open when the notebook was first opened. This dataset showed the complete dataset, including retweets and neutral tweets, with the word filter \emph{Corona} applied. Showing daily trends could give participants ideas for how to explore the data set further.
+Showing participants the trending topics for specific days could also solve another problem that became visible during the user tests. During the free exploration in the interviews, some participants immediately had ideas that they wanted to check in the dataset (see, for example, w26b, l. 9: \say{Ich probier es mal mit Stuttgart denn da gab es ja glaub ich eine der ersten dieser Hygiene-Demos}). Others only explored the data set that was open when the notebook was first opened. This dataset showed the complete dataset, including retweets and neutral tweets, with the word filter \emph{Corona} applied. Showing daily trends could give participants ideas on how to explore the data set further.
 
 \subsubsection*{Missing examples for the sentiment graph}\label{sec:missingExamples}
-Some participants said that they found the sentiment analysis interesting. Some wished for further explanation of how the sentiment is computed and also wished to see examples of Tweets with a sentiment of +1 and a sentiment of -1 (see m23, l. 73: \say{Also klar, was das irgendwie bedeuten soll, aber... wie sieht jetzt zum Beispiel ein positiver Tweet aus oder ein negativer.}).
+Some participants said that they found the sentiment analysis interesting. Some wished for further explanation on how the sentiment is computed and also wished to see examples of tweets with a sentiment of +1 and a sentiment of -1 (see m23, l. 73: \say{Also klar, was das irgendwie bedeuten soll, aber... wie sieht jetzt zum Beispiel ein positiver Tweet aus oder ein negativer.}).
 
 \begin{figure}[htb!]
     \centering
@@ -108,12 +108,12 @@ Some participants said that they found the sentiment analysis interesting. Some 
     \label{fig:sentiment_google}
 \end{figure}
 
-The same participant also said that he would have liked some advice on how to correctly interpret the sentiments, as well as potential pitfalls for the analysis that he should take care of. This explanation could be done in a similar form as Google explains the sentiment analysis in their Natural Language API Demo\footnote{https://cloud.google.com/natural-language/natural-language-api-demo, last visited on Sep. 24, 2020\\}, as seen in \textbf{Figure \ref{fig:sentiment_google}}. According to the participants, they would not want such an explanation for every single tweet, but rather for selected examples. This means that these examples could be hard-coded in the interface and would not have to be dynamically generated from the dataset.
+The same participant also said that he would have liked some advice on how to correctly interpret the sentiments, as well as potential pitfalls for the analysis that he should take care of. This explanation could be done in a similar way as Google explains the sentiment analysis in their Natural Language API Demo\footnote{https://cloud.google.com/natural-language/natural-language-api-demo, last visited on Sep. 24, 2020\\}, as seen in \textbf{Figure \ref{fig:sentiment_google}}. According to the participants, they would not want such an explanation for every single tweet, but rather for selected examples. This means that these examples could be hard-coded in the interface and would not have to be dynamically generated from the dataset.
 
-At the same time, other participants said that a lengthy explanation of how the algorithm works would not have helped her and that she preferred not to have additional explanations. This means that an explanation should be an optional interface component, e.g., a tooltip near the sentiment graph. This allows interested users to access the information, while users who do not want to learn more about sentiment analysis can focus on interpreting the data at hand.
+At the same time, other participants said that a lengthy explanation on how the algorithm works would not have helped them and that they preferred not to have additional explanations. This means that an explanation should be an optional interface component, e.g., a tooltip near the sentiment graph. This allows interested users to access the information, while users who do not want to learn more about sentiment analysis can focus on interpreting the data at hand.
 
 \subsubsection*{Neutral tweets-area was not marked as such}
-When asked to interpret the sentiment graph, multiple participants focused on the threshold of ±0.3 for neutral tweets. This threshold was mentioned for the explanation of the \emph{neutral Tweets}-toggle and is, as discussed in chapter 2, a common threshold to differentiate between neutral Tweets and Tweets that carry an opinion. The participants looked for peaks above or below ±0.3 to find days where the discourse on twitter was especially emotional. This could be facilitated by marking this area in the chart itself, similar to how the 0-baseline was marked. An example for this can be seen in \textbf{Figure \ref{fig:sentiment_neutral_area}}.
+When asked to interpret the sentiment graph, multiple participants focused on the threshold of ±0.3 for neutral tweets. This threshold was mentioned for the explanation of the \emph{neutral tweets}-toggle and is, as discussed in chapter 2, a common threshold to differentiate between neutral tweets and tweets that carry an opinion. The participants looked for peaks above or below ±0.3 to find days where the discourse on Twitter was especially emotional. This could be facilitated by marking this area in the chart itself, similar to how the 0-baseline was marked. An example for this can be seen in \textbf{Figure \ref{fig:sentiment_neutral_area}}.
 
 \begin{figure}[h!tb]
     \centering
@@ -140,7 +140,7 @@ Allowing users to explore a bigger data set could mean that the way the data set
     \label{fig:spiegel_visualization}
 \end{figure}
 
-The chart showing the new infections and corona-related casualties in Brasil can be manipulated by users in different ways:
+The chart showing the new infections and Corona-related casualties in Brazil can be manipulated by users in different ways:
 \begin{itemize}
     \item Buttons on top of the chart let users switch the scope of the data set between 1 month, 3 months, and the whole data set.
     \item The scroll bar allows users to move the selected time frame. This means they can see data from the last three months starting today, from the last three months starting next week, or wherever users move the scroll bar.
