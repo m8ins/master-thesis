@@ -539,7 +539,7 @@
   doi = {10.1109/BigData.2014.7004282},
   url = {http://ieeexplore.ieee.org/document/7004282/},
   urldate = {2020-06-26},
-  abstract = {Effective data visualization is a key part of the discovery process in the era of ``big data''. It is the bridge between the quantitative content of the data and human intuition, and thus an essential component of the scientific path from data into knowledge and understanding. Visualization is also essential in the data mining process, directing the choice of the applicable algorithms, and in helping to identify and remove bad data from the analysis. However, a high complexity or a high dimensionality of modern data sets represents a critical obstacle. How do we visualize interesting structures and patterns that may exist in hyper-dimensional data spaces? A better understanding of how we can perceive and interact with multidimensional information poses some deep questions in the field of cognition technology and human-computer interaction. To this effect, we are exploring the use of immersive virtual reality platforms for scientific data visualization, both as software and inexpensive commodity hardware. These potentially powerful and innovative tools for multi-dimensional data visualization can also provide an easy and natural path to a collaborative data visualization and exploration, where scientists can interact with their data and their colleagues in the same visual space. Immersion provides benefits beyond the traditional ``desktop'' visualization tools: it leads to a demonstrably better perception of a datascape geometry, more intuitive data understanding, and a better retention of the perceived relationships in the data.},
+  abstract = {Effective data visualization is a key part of the discovery process in the era of ``Big Data''. It is the bridge between the quantitative content of the data and human intuition, and thus an essential component of the scientific path from data into knowledge and understanding. Visualization is also essential in the data mining process, directing the choice of the applicable algorithms, and in helping to identify and remove bad data from the analysis. However, a high complexity or a high dimensionality of modern data sets represents a critical obstacle. How do we visualize interesting structures and patterns that may exist in hyper-dimensional data spaces? A better understanding of how we can perceive and interact with multidimensional information poses some deep questions in the field of cognition technology and human-computer interaction. To this effect, we are exploring the use of immersive virtual reality platforms for scientific data visualization, both as software and inexpensive commodity hardware. These potentially powerful and innovative tools for multi-dimensional data visualization can also provide an easy and natural path to a collaborative data visualization and exploration, where scientists can interact with their data and their colleagues in the same visual space. Immersion provides benefits beyond the traditional ``desktop'' visualization tools: it leads to a demonstrably better perception of a datascape geometry, more intuitive data understanding, and a better retention of the perceived relationships in the data.},
   file = {/Users/martin/Zotero/storage/D5MRY3RQ/Donalek et al. - 2014 - Immersive and collaborative data visualization usi.pdf},
   isbn = {978-1-4799-5666-1},
   language = {en}
@@ -585,7 +585,7 @@
   url = {http://ieeexplore.ieee.org/document/6845553/},
   urldate = {2020-09-03},
   abstract = {The concepts of Data Warehouse, Cloud Computing and Big Data have been proposed during the era of data flood. By reviewing current progresses in data warehouse studies, this paper introduces a framework to achieve better visualization for Big Data. This framework can reduce the cost of building Big Data warehouses by divide data into sub dataset and visualize them respectively. Meanwhile, basing on the powerful visualization tool of D3.js and directed by the principle of Whole-Parts, current data can be presented to users from different dimensions by different rich statistics graphics.},
-  file = {/Users/martin/Zotero/storage/FVX3CEEA/Fan Bao and Jia Chen - 2014 - Visual framework for big data in d3.js.pdf},
+  file = {/Users/martin/Zotero/storage/FVX3CEEA/Fan Bao and Jia Chen - 2014 - Visual framework for Big Data in d3.js.pdf},
   isbn = {978-1-4799-4565-8 978-1-4799-4566-5},
   language = {en}
 }
@@ -728,7 +728,7 @@
   year = {2020},
   url = {https://cloud.google.com/bigquery},
   urldate = {2020-07-15},
-  abstract = {BigQuery is a serverless, highly scalable, and cost-effective data warehouse designed to help you turn big data into informed business decisions.},
+  abstract = {BigQuery is a serverless, highly scalable, and cost-effective data warehouse designed to help you turn Big Data into informed business decisions.},
   file = {/Users/martin/Zotero/storage/EZJQSEZK/bigquery.html},
   journal = {Google Cloud},
   language = {en}
@@ -832,7 +832,7 @@
   year = {2019},
   pages = {73--98},
   publisher = {{Springer}},
-  file = {/Users/martin/Zotero/storage/W9EPH6PP/Helbing et al. - 2019 - Will democracy survive big data and artificial int.pdf}
+  file = {/Users/martin/Zotero/storage/W9EPH6PP/Helbing et al. - 2019 - Will democracy survive Big Data and artificial int.pdf}
 }
 
 @inproceedings{hu2012breaking,

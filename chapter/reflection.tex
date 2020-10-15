@@ -1,5 +1,5 @@
 \section{Method reflection}
-This section will discuss the methods used for this master thesis. While the results generally show that Twitter data can be automatically collected, stored, and visualized so that laymen can gain insight from these visualizations, there is still room for improvement in further studies.
+This Section will discuss the methods used for this master thesis. While the results generally show that Twitter data can be automatically collected, stored, and visualized so that laymen can gain insight from these visualizations, there is still room for improvement in further studies.
 
 \subsection*{Using SQL databases instead of NoSQL}
 As discussed in chapter \ref{sec:storage}, one of the earliest decisions while working on this thesis was whether to use a NoSQL database, like Firebase, or an SQL database. Both of these solutions have their advantages and drawbacks. NoSQL databases are generally easier to query, as their query syntax often uses method chaining for filtering and querying. This means that the syntax can closely follow how the query would be described verbally. One could, e.g., want to see all tweets by verified accounts, but only those that have a sentiment between +0.3 and +1. Using method chaining, the query could be something like the following:
@@ -8,7 +8,7 @@ As discussed in chapter \ref{sec:storage}, one of the earliest decisions while w
     data.filter('is_verified', '==', 'true').filter('sentiment', '>=', '+0.3')
 \end{verbatim}
 
-The drawback is that NoSQL databases can become slow when they need to aggregate over large amounts of data. This is one of the core strengths of SQL databases, as they remain performant even with big data sets. SQL also uses a fixed table scheme, which helps to keep the data in a strict form as is needed for the interactive visualizations. However, as they work with the principle of relational algebra, SQL queries are harder to write.
+The drawback is that NoSQL databases can become slow when they need to aggregate over large amounts of data. This is one of the core strengths of SQL databases, as they remain performant even with Big Data sets. SQL also uses a fixed table scheme, which helps to keep the data in a strict form as is needed for the interactive visualizations. However, as they work with the principle of relational algebra, SQL queries are harder to write.
 
 Seeing that the final dataset collected throughout the study was more than 1GB big, SQL seemed to be the right choice, even if the queries were more complicated to write.
 
@@ -17,7 +17,7 @@ One of the biggest issues for the author of this study is that the focus of the 
 
 \begin{enumerate}
     \item The automated collection and storage of every German tweet to a specific topic---in this case, tweets related to the Coronavirus,
-    \item and an easily accessible visualization of these tweets which can give insight to laymen when it comes to analyzing big data.
+    \item and an easily accessible visualization of these tweets which can give insight to laymen when it comes to analyzing Big Data.
 \end{enumerate}
 
 One of the study's goals was to test several approaches on how to implement these two parts. To evaluate the outcome of this study from a communications science-perspective, an additional interview study based on Mayring's approach to qualitative content analysis was conducted. The results reported in this thesis are mostly based on the findings of this interview study.
@@ -50,8 +50,8 @@ There are two ways to improve this situation:
 
 Incorporating these changes would make the tool more accessible.
 
-\subsection*{Using Shape Up to write a master's thesis} \label{sec:shape_up}
-The big data pipeline, the visualization dashboard, and the user studies were all planned and executed using the principles of \emph{Shape Up}, a relatively new management approach for software development projects (\cite{singerShapeStopRunning2019}). The core principle of Shape Up is to have a fixed time frame with a variable scope. Instead of creating a set of user stories, which then get estimated on how long they probably take, Shape Up's philosophy is to set clear boundaries, take a fixed amount of time (usually six weeks), and make the best use of this time. This methodology seemed like a more reasonable approach to writing a prototype for a master's thesis as the time frame is very strict.
+\subsection*{Using Shape Up to write a masters thesis} \label{sec:shape_up}
+The Big Data pipeline, the visualization dashboard, and the user studies were all planned and executed using the principles of \emph{Shape Up}, a relatively new management approach for software development projects (\cite{singerShapeStopRunning2019}). The core principle of Shape Up is to have a fixed time frame with a variable scope. Instead of creating a set of user stories, which then get estimated on how long they probably take, Shape Up's philosophy is to set clear boundaries, take a fixed amount of time (usually six weeks), and make the best use of this time. This methodology seemed like a more reasonable approach to writing a prototype for a masters thesis as the time frame is very strict.
 
 Using Shape Up worked well and ensured that the initially defined schedule was followed until the end. In hindsight, though, admitting as much time to building the Big Data-pipeline as to researching and building the interactive visualizations was questionable. Due to the principle \emph{fixed appetite, variable scope}, the full six weeks that were planned for completing the pipeline were used. A first working, albeit a rough one, was already running on the   servers after four weeks, so that the additional two weeks were used to reduce complexity in the code and make it a bit more stable. These two extra weeks could have been helpful to enhance the two visualizations that were built the following six weeks. Nevertheless, Shape Up facilitated meeting the self-set deadlines.
 

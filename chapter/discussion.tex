@@ -1,8 +1,8 @@
 \section{Discussion}
-This section will discuss the findings from the interview study. For hindering factors that were found, a possible solution will be discussed. For motivational factors, ways to further improve these factors will be taken into consideration.
+This Section will discuss the findings from the interview study. For hindering factors that were found, a possible solution will be discussed. For motivational factors, ways to further improve these factors will be taken into consideration.
 
 \subsection{Motivational factors}
-During the coding process of the interviews, several factors that motivated participants to use the prototype were found. Here, these motivational factors that were found during testing are discussed. Possible ways to further strengthen these points in future developments of the tool are proposed in this section.
+During the coding process of the interviews, several factors that motivated participants to use the prototype were found. Here, these motivational factors that were found during testing are discussed. Possible ways to further strengthen these points in future developments of the tool are proposed in this Section.
 
 \subsubsection*{Easily understandable visualizations}
 The participants said that the visualizations were easily understandable. Future development should keep in mind that the ability to quickly understand the visualizations motivated the participants to discuss the results further, rather than being preoccupied trying to understand what the visualization tries to show them.
@@ -12,7 +12,7 @@ To keep the visualizations easily readable, the paradigm \emph{one job per visua
 The separation of the visualizations could be deepened even further by showing the different visualizations in different tabs. During the user tests, the participants rarely referred to the other visualization during interpretation.
 
 \subsubsection*{Interesting results}
-Participants said that the results are interesting and surprising, which according to \citeauthor{northMeasuringVisualizationInsight2006} is an indicator that they could gain insight. Future versions of the prototype could allow participants the easy exporting of specific results to share them with interested friends if they find results surprising or interesting. Participants also reported that the tool made them reflect their own beliefs of how social media works and how discussions unfold.
+Participants said that the results are interesting and surprising, which according to \citeauthor{northMeasuringVisualizationInsight2006} is an indicator that they could gain insight. Future versions of the prototype could allow participants the easy exporting of specific results to share them with interested friends if they find results surprising or interesting. Participants also reported that the tool made them reflect their own beliefs of how social networks work and how discussions unfold.
 
 \subsubsection*{Supporting explanatory texts}
 The explanatory texts helped the participants understand the visualizations and the capabilities of the tool better. As discussed in chapter \ref{sec:missingExamples}, these explanatory texts can be further improved, e.g., by adding examples and hints for analysis.
@@ -40,8 +40,8 @@ During user tests, the toggles were mostly used for a before-and-after view of t
 \subsubsection*{Tooltip with further information}
 The tooltip that was shown in the volume chart helped participants finding answers to their questions. Future development could focus on making this tooltip more helpful. One important step for this would be to create a more visually appealing tooltip which contains styled information. The tooltip that was eventually used in this study could only handle single strings of unstyled text. However, text styling is one of the most efficient ways to structure information so that it can be easily digested. 
 
-\subsection{Hindering factors: missing interface components}
-Some of the problems that were mentioned can be solved by introducing additional interface components. The problems and their proposed solutions are discussed in this section.
+\subsection{Hindering factors: Missing interface components}
+Some of the problems that were mentioned can be solved by introducing additional interface components. The problems and their proposed solutions are discussed in this Section.
 
 \subsubsection*{Overview of currently set filters}
 Multiple participants had trouble recognizing what data filters were applied for the current visualization. The idea that the filters can be changed on top of the notebook and will then influence the rest of the visualization does not seem to work, especially on smaller laptops, as this resulted in a lot of scrolling.
@@ -55,10 +55,10 @@ Multiple participants had trouble recognizing what data filters were applied for
 This means that the filter status should be visible directly next to the visualization. This way, participants would not need to search for the current filter status. Rather, the status would almost always be in view while interpreting the visualizations. There are two possible ways to show the filters near the visualizations:
 \begin{enumerate}
     \item \textbf{Show a descriptive text above the visualization:} Using a text to show the status of the filter could help participants to quickly understand what kind of data the visualization is showing at the moment. One example of this technique can be found on Amazon, as seen in \textbf{Figure \ref{fig:amazon_filters}}. This technique is especially useful when a lot of different filters can be applied.
-    \item \textbf{Show the filter toggles right next to the visualization:} Instead of showing the filter status as a text, showing the filters with the actual toggles would allow users to change the filters right next to the visualization.
+    \item \textbf{Show the filter toggles right next to the visualization:} Instead of showing the filter status as a text, showing the filters with the actual toggles would allow users to change the filters right next to the visualization. A mock-up for this solution can be seen in \textbf{Figure \ref{fig:legend_and_filters}}.
 \end{enumerate}
 
-\begin{figure}[h!tbp]
+\begin{figure}[h!tb]
     \fbox{\includegraphics[width=\linewidth]{images/legend_and_filters.png}}
     \caption{Proposed layout of the tweet volume with a legend and filters directly next to the graph.}
     \label{fig:legend_and_filters}
@@ -78,7 +78,7 @@ The added legend could also help solve the layout problem that participants ment
 \subsubsection*{Loading indicator}
 Another component that was missing from the interface was an indicator that new data was fetched from the server. One possibility to show this fetching would be to show a small loading indicator next to the word filter. However, this position may not be noticeable enough. It would also not indicate that the visualization does not yet reflect the selected data set.
 
-Another possibility would be to show in the visualizations themselves that new data is being fetched. As fetching takes about 5 seconds and the visualizations have not been updated before the fetching is complete, it should not be a big problem to visually hide the visualizations during the fetching stage. A possible solution for this can be seen in figure \ref{fig:fetching_state}.
+Another possibility would be to show in the visualizations themselves that new data is being fetched. As fetching takes about 5 seconds and the visualizations have not been updated before the fetching is complete, it should not be a big problem to visually hide the visualizations during the fetching stage. A possible solution for this can be seen in \textbf{Figure \ref{fig:fetching_state}}.
 
 \begin{figure}[htb]
     \fbox{\includegraphics[width=\linewidth]{images/fetching_state.png}}
@@ -86,11 +86,11 @@ Another possibility would be to show in the visualizations themselves that new d
     \label{fig:fetching_state}
 \end{figure}
 
-\subsection{Hindering factors: missing information}
-The contents of this section are about pieces of information that participants said they would expect to be able to interpret the data more efficiently. This information can be textual or visual: Textual information means written text, some additional explanation of how to work with the tool, or more detailed information. Visual information means, e.g., more emphasis on certain aspects of the charts, or highlighted information.
+\subsection{Hindering factors: Missing information}
+The contents of this Section are about pieces of information that participants said they would expect to be able to interpret the data more efficiently. This information can be textual or visual: Textual information means written text, some additional explanation of how to work with the tool, or more detailed information. Visual information means, e.g., more emphasis on certain aspects of the charts, or highlighted information.
 
 \subsubsection*{Missing real-world context}
-As discussed in section \ref{sec:cutForTime}, one idea that was not implemented due to time constraints was to give participants some context as to what happened on specific days based on the tweet-texts themselves. Because the calculated collocations did not yield satisfying results, this feature was not implemented for the prototype of the dashboard.
+One idea that was not implemented due to time constraints was to give participants some context as to what happened on specific days based on the tweet-texts themselves. Because the calculated collocations did not yield satisfying results, this feature was not implemented for the prototype of the dashboard. This cut feature is further discussed in Section \ref{sec:cutForTime}.
 
 Some participants explicitly said that they would have liked to know what happened on specific days, especially when they recognized spikes in Twitter activity for a topic or spikes in the sentiment on a specific day. Further development of the tool should take this into account and, e.g., collect daily Twitter trends using the Trend API\footnote{https://developer.twitter.com/en/docs/twitter-api/v1/trends/trends-for-location/api-reference/get-trends-place, last visited on Sep. 24, 2020 \\}. This would allow participants to analyze the dataset more thoroughly. In several interviews, participants said that they would have wanted more context to understand spikes in the tweet volume or the sentiment graph. They expected this information to be present in the prototype itself, and no participant searched the internet for further information on what happened on these days.
 
@@ -123,16 +123,16 @@ When asked to interpret the sentiment graph, multiple participants focused on th
 \end{figure}
 
 \subsection{Hindering factors: Technical limitations}
-This section discusses findings from the interview where technical limitations hindered participants from solving tasks. Some of these limitations were conscious trade-offs for this prototype version. Nonetheless, these issues should be addressed if a tool based on this prototype should be further developed.
+This Section discusses findings from the interview where technical limitations hindered participants from solving tasks. Some of these limitations were conscious trade-offs for this prototype version. Nonetheless, these issues should be addressed if a tool based on this prototype should be further developed.
 
 \subsubsection*{Fixed data set} \label{sec:fixedDataSet}
-The fixed data set came up in one interview where the participant tried to scroll the data set to reveal even more days. This revealed one of the biggest disadvantages of using Twitter's streaming API to collect tweets in real-time (see section \ref{sec:fetchedData}). Using this method guarantees the most complete data set on the free tier of Twitter's API, at least from the time the data collection is started. The downside is that using this API makes it impossible to access past tweets. Users of the tool have to recognize a potentially interesting topic very early, start the data collection, and then wait some time until enough data has been gathered.
+The fixed data set came up in one interview where the participant tried to scroll the data set to reveal even more days. This revealed one of the biggest disadvantages of using Twitter's streaming API to collect tweets in real-time (see Section \ref{sec:fetchedData}). Using this method guarantees the most complete data set on the free tier of Twitter's API, at least from the time the data collection is started. The downside is that using this API makes it impossible to access past tweets. Users of the tool have to recognize a potentially interesting topic very early, start the data collection, and then wait some time until enough data has been gathered.
 
 Using the paid API to access Twitter's archives could solve this problem, at least in parts. The paid access to Twitter's archives gives access to the past 30 days of activity on Twitter, which could give a 'headstart' to the data collection. For a final version of this tool, a combined approach could be possible: using the real-time data collection of a specific topic with the streaming API, and simultaneously fetching the last 30 days of Twitter activity to this topic. This would mean that users would be able to analyze the past month of tweets directly from the beginning of the data collection, eliminating the need to wait some days before they can gather meaningful results from Twitter.
 
 If this approach would be used, the data collection pipeline would have to be modified further. In the current implementation, the sentiment of a tweet is computed synchronously when the tweet is sent to the collecting app by the streaming API. The data sent by the Twitter archive may be too big to compute the sentiment synchronously. In this case, users should get a message that the sentiment is being computed, but that they can already start analyzing the volume graph.
 
-Allowing users to explore a bigger data set could mean that the way the data set is presented has to be changed. One example of showing a data set that spans multiple months can be seen on Spiegel Online (\cite{merlotCoronavirusBrasilienManaus2020}).
+Allowing users to explore a bigger data set could mean that the way the data set is presented has to be changed. One example of showing a data set that spans multiple months can be seen on Spiegel Online (\cite{merlotCoronavirusBrasilienManaus2020}, see also the screenshot \textbf{Figure \ref{fig:spiegel_visualization}}).
 
 \begin{figure}[htb!]
     \fbox{\includegraphics[width=\linewidth]{images/spiegel_visualization.png}}
