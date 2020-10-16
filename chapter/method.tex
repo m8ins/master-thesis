@@ -38,13 +38,13 @@ Twitter offers two different methods to automatically collect tweets:
 \end{enumerate}
 
 For this study, the Streaming API was used as it gives the most complete data set on Twitter's free tier (\cite{brunsTwitterDataWhat2014}). It pushes (or streams) tweets that match the above-mentioned criteria to a specified endpoint the moment such a tweet gets sent on Twitter. %The alternative to the Streaming API is to access Twitter's archive, access to which is severely limited on the free tier of the Twitter API. Using the free tier, it is only possible to collect data from the last seven days, and even then the data set is not complete. Because of this, the Streaming API was used in this study.
-%TODO: Grafik zur Erläuterung. Kann ja vermutlich ein einfaches Flussdiagramm sein: Python App (bekommt tweets von) Streaming API (läuft auf) Docker-Container (schubst Daten nach) BigQuery
+
 
 Using the streaming API had two downsides. First, the Python app that collected the tweets had to reliably run 24/7 over a prolonged time. The Streaming API streams the data as it comes in and does not save it on Twitter's network, which means that every tweet the Python app does not 'catch' immediately will be lost. Second, data produced by the streaming API could only be analyzed after the collection ran for several days. This trade-off, and possible ways to circumvent it, will be further discussed on page \pageref{sec:fixedDataSet}.
 
-To ensure constant availability, the python application that connects to the Streaming API and processes the incoming tweets runs on Google's App Engine (\cite{googleAppEngineApplication2020}). App Engine is Google's high-reliability service for serverless cloud apps. Programmers can use App Engine to constantly run their apps on Google's servers, instead of hosting their servers.
+To ensure constant availability, the python application that connects to the Streaming API and processes the incoming tweets runs on Google App Engine (\cite{googleAppEngineApplication2020}). App Engine is Google's high-reliability service for serverless cloud apps. Programmers can use App Engine to constantly run their apps on Google's servers, instead of hosting their servers.
 
-Inside of App Engine, the Python app ran in a Docker Container (\cite{merkel2014docker}). Docker Containers bundle the operating system, dependencies, settings, and more. As Docker's documentation puts it,
+Inside of App Engine, the Python app runs in a Docker Container (\cite{merkel2014docker}). Docker Containers bundle the operating system, dependencies, settings, and more. As Docker's documentation puts it,
 
 \begin{quote}
     A [Docker] container is nothing but a running process, with some added encapsulation features applied to it in order to keep it isolated from the host and from other containers. One of the most important aspects of container isolation is that each container interacts with its own private filesystem; this filesystem is provided by a Docker image. \emph{An image includes everything needed to run an application} - the code or binary, runtimes, dependencies, and any other filesystem objects required. (\cite{dockerOrientationSetup2020}, emphasis by the author.)
@@ -61,7 +61,7 @@ One powerful tool to calculate the sentiment of a text with a machine learning-b
 
 Another machine learning-based approach for calculating sentiments, based on Stanford NLP (\cite{stanfordnlp-groupSoftwareStanfordNatural}), was also considered for this study. This approach requires a second server that runs a Java application. This would have meant a second instance of Google App Engine, doubling the costs.
 
-Considering that the goal of this study is to test how laymen work with the data set, and not a scientific analysis of the discussion about the coronavirus in the German Twitter-sphere, the dictionary-based approach was chosen to keep down the costs. %maybe re-formulate it so it doesn't sound as lazy?
+Considering that the goal of this study is to test how laymen work with the data set, and not a scientific analysis of the discussion about the coronavirus in the German Twitter-sphere, the dictionary-based approach was chosen to keep the costs down.
 
 \subsubsection{Storing the pre-processed tweets}\label{sec:storage}
 tweets collected via the Streaming API are bundled to batches of 100. These batches then get published as a message to a \emph{Pub/Sub Topic}. Pub/Sub allows asynchronous messaging between services that \emph{produce} events, like in this case the app that collects the tweets, and services that \emph{process} events, in this case the database which stores the collected tweets (\cite{googleWhatPubSub2020}).
@@ -78,10 +78,10 @@ To visualize the data from the Streaming API, both Python libraries like ggplot 
 
 Ultimately, D3 was chosen as a visualization framework. VegaLite is an opinionated framework that chooses many defaults for the user, while D3 is unopinionated. This means that the visualizations are harder to code but more versatile.
 
-Early prototypes of the tool used a Svelte-based web page to show the visualizations. The final tool, however, was written in Observable\footnote{https://observablehq.com}. Observable is a JavaScript-based notebook that, similarly to Jupyter Notebooks, combines code, output, and explanatory text. The notebooks allowed for quick iteration of the code, while its web-based nature also satisfied the requirement of being easily accessible without the need to download and install additional software.
+Early prototypes of the tool used a Svelte-based web page to show the visualizations. The final tool, however, was written in Observable\footnote{https://observablehq.com}. Observable is a JavaScript-based notebook that, similarly to Jupyter Notebooks, combines code, output, and explanatory text. The notebooks allowed a quick iteration of the code, while its web-based nature also satisfied the requirement of being easily accessible without the need to download and install additional software.
 
 \subsubsection{Filtering and fetching data from the database}
-While D3 can work with raw data input and perform, e.g., filtering operations on these inputs, data operations were performed directly in the database using SQL queries. This decision was made because the final data set was almost 1GB big. Relying on D3 for filtering and aggregating the data would have meant that every time a user opens the tool, they would have to wait for the whole data set to finish downloading before they could use the tool itself. Using SQL queries instead meant that a lot fewer data had to be sent to the tool. Instead of downloading the full 997MB of the data set, the query results were only about 10KB big which greatly improved performance.
+While D3 can work with raw data input and perform, e.g., filtering operations on these inputs, data operations were performed directly in the database using SQL queries. This decision was made because the final data set was almost 1GB big. Relying on D3 for filtering and aggregating the data would have meant that every time a user opens the tool, they would have to wait for the whole data set to finish downloading before they could use the tool itself. Using SQL queries instead meant that considerably fewer data had to be sent to the tool. Instead of downloading the full 997MB of the data set, the query results were only about 10KB big which greatly improved performance.
 
 %To explore the data set of collected tweets, users can have three additional filters that they can use
 Users could explore the data using different filters. This corresponds to the second part of Shneiderman's Visual Information Seeking Mantra \say{zoom and filter} (\cite[337]{shneidermanEyesHaveIt1996}). Users could use three different filters:
@@ -96,7 +96,7 @@ The final layout of the toggles can be seen in \textbf{Figure \ref{fig:volume_ba
 
 The toggles to include retweets and neutral tweets in the data set changed the visualizations immediately, whereas the word-filter initiated a new database query. The idea behind this was that users are likely to look for a specific topic and then want to explore how this topic is presented in the data set.
 
-One possible scenario is that users want to research the public's general opinion on masks. They then enter the keyword \emph{mask} into the search field and can then explore this topic further. The first version of the dashboard made a new database call every time one of the toggles was clicked. This became an issue already in early stages of creating the prototype: The delay caused by the database call made it difficult to compare the visualizations with the different filters, e.g., to compare how the graph looks with or without retweets included.
+One possible scenario is that users want to research the public's general opinion on masks. They then enter the keyword \emph{mask} into the search field and can then explore this topic further. The first version of the dashboard made a new database call every time one of the toggles was clicked. This became an issue already in the early stages of creating the prototype: The delay caused by the database call made it difficult to compare the visualizations with the different filters, e.g., to compare how the graph looks with or without retweets included.
 
 Because of this, data fetching was rewritten before the user tests started. Every time a user filters for a new word, the tool fetches the data for the four different filter permutations: the full data set, the data set without retweets, the data set without neutral tweets, and the data set without retweets and neutral tweets. If the user then toggles additional filters, the corresponding pre-fetched data set gets immediately visualized instead of fetching a new data set from the database.
 
@@ -138,7 +138,7 @@ This ensured that datasets remained easily comparable when different filters wer
     \label{fig:variableVsFixedDomain}
 \end{figure}
 
-The bar chart showing the tweet volume over time also contained tooltips, satisfying \citeauthor{shneidermanEyesHaveIt1996}'s requirement for \emph{details-on-demand} (\cite{shneidermanEyesHaveIt1996}). These tooltips were realized by adding title attributes to the div-containers that create the bars. The code for this can be seen in \textbf{Figure \ref{code:details_title}}. By hovering over the bars, this title attribute was shown---this is the default behavior for every modern browser. The title attribute contained the date of the currently hovered bar, the total number of tweets on this day, the number of tweets containing the search word on this day, and the percentage of tweets containing the search word on this day. As the line chart is not built using a single div per day, but rather from one SVG-line, this solution could not be used in the chart showing the development of the sentiment over time. This limitation will be further discussed in Section \ref{fw_tooltips}.
+The bar chart showing the tweet volume over time also contained tooltips, satisfying \citeauthor{shneidermanEyesHaveIt1996}'s requirement for \emph{details-on-demand} (\cite{shneidermanEyesHaveIt1996}). These tooltips were realized by adding a title attribute to each of the div-containers that create the bars. The code for this can be seen in \textbf{Figure \ref{code:details_title}}. By hovering over the bars, this title attribute was shown---this is the default behavior for every modern browser. The title attribute contained the date of the currently hovered bar, the total number of tweets on this day, the number of tweets containing the search word on this day, and the percentage of tweets containing the search word on this day. As the line chart is not built using a single div per day, but rather from one SVG-line, this solution could not be used in the chart showing the development of the sentiment over time. This limitation will be further discussed in Section \ref{fw_tooltips}.
 
 \begin{figure}[h!]
     \begin{verbatim}
@@ -150,7 +150,7 @@ svg.append("rect:title")
     } Tweets (${(d.percentage * 100).toFixed(1)} %)`
 );
     \end{verbatim}
-    \caption{The code that adds the date, the number of words containing the search word, the total number of tweets, and the percentage of words containing the search word to the bin of every day. The detailed data were added as an unformatted string to the title attribute.}
+    \caption{The code that adds the date, the number of words containing the search word, the total number of tweets, and the percentage of words containing the search word to the bin of every day. The detailed data was added as an unformatted string to the title attribute.}
     \label{code:details_title}
 \end{figure}
 
@@ -163,13 +163,13 @@ The visualization which shows the development of the average daily sentiment is 
     \label{fig:sentiment_linechart}
 \end{figure}
 
-In this visualization, users can toggle between two view modes. The default mode shows the daily average sentiment of the tweets containing the search word as a blue line and the daily average sentiment of tweets \emph{not} containing the word as a red line. Users can also toggle to only see the average sentiment without any word-filters applied. This lets them, e.g., see the influence of neutral tweets or retweets on the whole data set.
+In this visualization, users can toggle between two view modes. The default mode shows the daily average sentiment of the tweets containing the search word as a blue line and the daily average sentiment of tweets \emph{not} containing the word as a red line. Users can also toggle to only see the average sentiment without any word-filters applied. This allows them, e.g., to see the influence of neutral tweets or retweets on the whole data set.
 
 The two visualizations share the same three aforementioned filters. Consequently, both visualizations share the same data set which could make it easier for participants to mentally connect them. At the same time, placing the filter possibilities at the top of the Observable notebook means that the visualizations are affected by filters that are not in their immediate neighborhood. As this trade-off was tested in the user study, it will be further discussed later in this work.
 
-Explanatory texts for the visualizations were written and placed below the visualizations. This was done so that users are first confronted with the visualization and have the chance to find out what is displayed by themselves. Should they need further assistance, they could read the text below the visualization. Presenting the visualizations and the explanations in this order allows participants to try and form an understanding of the charts before and then test their assumptions against the explanation below.
+Explanatory texts for the visualizations were written and placed below the visualizations. This was done so that users are first confronted with the visualization and have the chance to find out what is displayed by themselves. Should they need further assistance, they can read the text below the visualization. Presenting the visualizations and the explanations in this order allows participants to try and form an understanding of the charts before and then test their assumptions against the explanation below.
 
-The explanatory texts contained information about what kind of data was displayed, and what the different parts of the chart meant. They also included the explanation of which color coded which information in the visualizations.
+The explanatory texts contained information about what kind of data was displayed, and what the different parts of the chart meant. They also included the explanation which color coded which information in the visualizations.
 
 \subsection{Testing the dashboard}
 The user tests of the dashboard were testing two things: how users explore the data set using the dashboard, and how easily they can read the two visualizations. To test this, a guide for a semi-structured interview was prepared (\cite[315ff.]{schnell1999methoden}). This guide can be found in the appended USB storage.
@@ -192,7 +192,7 @@ After this phase of free exploration, the participants were asked to solve four 
 
 After the participants had completed the four tasks, a retrospective interview was conducted. The retrospective interview asked participants about their experience working with the tool and solving the tasks. Questions that the interviewer had during testing were also asked in the retrospective interview instead of during testing itself. Participants were also asked to report whether they had any questions in mind that they thought they should be able to answer using the dashboard.
 
-Due to the ongoing Covid-19 pandemic, the interviews were conducted with the online video conference system Zoom\footnote{https://zoom.us}, rather than in person. Conducting the interview using Zoom had both advantages and disadvantages. On the one hand, Zoom allowed the recording of both the audio, the screen, and the participants' webcam, which made transcribing easier. Participants could also take part in the study from their own home, rather than having to travel to a prepared test room. This made it possible to ask participants who did not live in Aachen to take part in the interviews.
+Due to the ongoing Covid-19 pandemic, the interviews were conducted with the online video conference system Zoom\footnote{https://zoom.us}, rather than in person. Conducting the interview using Zoom had both advantages and disadvantages. On one hand, Zoom allowed the recording of the audio, the screen, and the participants' webcam, which made transcribing the recordings easier. Participants could also take part in the study from their own home, rather than having to travel to a prepared test room. This made it possible to ask participants who did not live in Aachen to take part in the interviews.
 
 On the other hand, even though Zoom does not require a lot of effort to set up, this meant that people without access to an internet-capable device could not participate in the study. Also, less tech-savvy people could have been hindered from participating in the study because they did not want to or did not know how to install Zoom and join the video conference.
 
